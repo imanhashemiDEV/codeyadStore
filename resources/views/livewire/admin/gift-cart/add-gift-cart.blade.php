@@ -53,6 +53,13 @@
     </div>
     <div class="card">
         <div class="card-body">
+            <div>
+                @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        {{session('message')}}
+                    </div>
+                @endif
+            </div>
             <div class="container">
                 <h6 class="card-title"> ایجاد کارت هدیه</h6>
                 <form wire:submit.prevent="addGiftCart">
@@ -61,11 +68,17 @@
                         <div class="col-sm-10">
                             <label  class="col-sm-2 col-form-label">@if($selected_user) {{$selected_user['name']}} @endif</label>
                         </div>
+                        <div>
+                            @error('selected_user') <p class="alert alert-danger">{{$message}}</p>  @enderror
+                        </div>
                     </div>
                     <div class="form-group row">
                         <label  class="col-sm-2 col-form-label">عنوان کارت هدیه</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control text-left" dir="rtl" wire:model.defer="gift_title">
+                        </div>
+                        <div >
+                            @error('gift_title') <p class="alert alert-danger">{{$message}}</p>  @enderror
                         </div>
                     </div>
                     <div class="form-group row">
@@ -73,12 +86,18 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control text-left" dir="rtl" wire:model.defer="gift_price">
                         </div>
+                        <div >
+                            @error('gift_price') <p class="alert alert-danger">{{$message}}</p> @enderror
+                        </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label"> تاریخ انقضای کد تخفیف </label>
                         <div class="col-sm-10">
                             <input type="text" id="expiration_date" class="text-left form-control" dir="rtl"
                                    wire:model.defer="expiration_date">
+                        </div>
+                        <div>
+                            @error('expiration_date') <p class="alert alert-danger">{{$message}}</p>  @enderror
                         </div>
                     </div>
                     <div class="form-group row">
@@ -91,3 +110,42 @@
         </div>
     </div>
 </main>
+@section('scripts')
+
+    <script>
+
+        window.addEventListener('refreshDatePicker',event=>{
+            var customOptions = {
+                placeholder: "روز / ماه / سال"
+                , twodigit: false
+                , closeAfterSelect: true
+                , nextButtonIcon: "fa fa-arrow-circle-right"
+                , previousButtonIcon: "fa fa-arrow-circle-left"
+                , buttonsColor: "#5867dd"
+                , markToday: true
+                , markHolidays: true
+                , highlightSelectedDay: true
+                , sync: true
+                , gotoToday: true
+            }
+            kamaDatepicker('expiration_date', customOptions);
+        })
+
+        var customOptions = {
+            placeholder: "روز / ماه / سال"
+            , twodigit: false
+            , closeAfterSelect: true
+            , nextButtonIcon: "fa fa-arrow-circle-right"
+            , previousButtonIcon: "fa fa-arrow-circle-left"
+            , buttonsColor: "#5867dd"
+            , markToday: true
+            , markHolidays: true
+            , highlightSelectedDay: true
+            , sync: true
+            , gotoToday: true
+        }
+        kamaDatepicker('expiration_date', customOptions);
+    </script>
+
+
+@endsection

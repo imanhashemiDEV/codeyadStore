@@ -202,6 +202,10 @@ return [
         'zip_code'=>'کدپستی',
         'receive_time'=>'زمان دریافت',
         'send_type'=>'نوع ارسال',
+        'selected_user'=>'کاربر',
+        'gift_title'=>'عنوان کارت هدیه',
+        'gift_price'=>'قیمت کارت هدیه',
+        'expiration_date'=>'تاریخ انقضا',
 
 
     ],
