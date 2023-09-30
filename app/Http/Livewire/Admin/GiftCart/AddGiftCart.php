@@ -20,31 +20,45 @@ class AddGiftCart extends Component
     public function mount()
     {
         $this->users = collect();
-        $this->selected_user=null;
     }
 
     public function submit()
     {
+        $this->validate([
+            'search'=>'required'
+        ]);
         $this->users = User::query()->
         where('name','like','%'.$this->search.'%')->
         Orwhere('mobile','like','%'.$this->search.'%')->
         Orwhere('email','like','%'.$this->search.'%')->
         get();
+
+        $this->dispatchBrowserEvent('refreshDatePicker');
     }
 
     public function selectUser($user)
     {
         $this->selected_user=$user;
+        $this->dispatchBrowserEvent('refreshDatePicker');
     }
 
     public function addGiftCart()
     {
+        $this->validate([
+            'selected_user'=>'required',
+            'gift_title'=>'required',
+            'gift_price'=>'required',
+            'expiration_date'=>'required',
+        ]);
+
         GiftCart::query()->create([
+            'user_id'=>$this->selected_user['id'],
             'code'=>UniqueCodeGenerator::generateRandomString(6,Discount::class),
             'gift_title'=>$this->gift_title,
             'gift_price'=>$this->gift_price,
             'expiration_date'=> DateManager::shamsi_to_miladi($this->expiration_date),
         ]);
+         session()->flash('message','کارت هدیه با موفقیت ثبت شد');
     }
     public function render()
     {

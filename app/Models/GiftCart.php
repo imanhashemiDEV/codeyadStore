@@ -16,4 +16,9 @@ class GiftCart extends Model
         'gift_price',
         'expiration_date'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
