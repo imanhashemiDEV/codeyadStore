@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Frontend\Order;
 
 use App\Enums\CartType;
 use App\Models\Cart;
+use App\Models\Discount;
+use App\Models\GiftCart;
 use App\Models\PaymentType;
 use App\Models\ProductGuaranty;
 use Livewire\Component;
@@ -11,6 +13,16 @@ use Livewire\Component;
 class Payment extends Component
 {
     public $payment_type;
+
+    public function checkDiscountCode($code)
+    {
+        $discount = Discount::query()->where('code',$code)->first();
+    }
+
+    public function checkGiftCartCode($code)
+    {
+       $gift_cart = GiftCart::query()->where('code',$code)->first();
+    }
     public function render()
     {
         $payment_types = PaymentType::query()->get();

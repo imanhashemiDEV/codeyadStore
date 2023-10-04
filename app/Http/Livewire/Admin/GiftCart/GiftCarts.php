@@ -2,8 +2,6 @@
 
 namespace App\Http\Livewire\Admin\GiftCart;
 
-use App\Enums\DiscountStatus;
-use App\Models\Discount;
 use App\Models\GiftCart;
 use Livewire\Component;
 use Livewire\WithPagination;
