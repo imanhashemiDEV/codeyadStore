@@ -38,9 +38,11 @@ class Shipping extends Component
     {
         if(Carbon::now()->addDays($this->send_day)->dayOfWeek != CarbonInterface::FRIDAY){
             $this->receive_day = Carbon::now()->addDays($this->send_day+1) ;
-            $this->selected_day_index = 1;
+            $this->selected_day_index = 0;
         }
          $this->receive_day =  Carbon::now()->addDays($this->send_day);
+        $this->send_type = "usual";
+        $this->receive_time = "9-12";
     }
 
     public function submitOrderInfo()
