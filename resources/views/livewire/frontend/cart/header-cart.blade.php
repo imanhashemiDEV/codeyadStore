@@ -56,7 +56,7 @@
                 </div>
 
                 <div>
-                    <a href="#" class="header-cart-info-submit">
+                    <a href="{{route('user.shipping')}}" class="header-cart-info-submit">
                         ثبت سفارش
                     </a>
                 </div>
