@@ -126,7 +126,7 @@
                 <div class="checkout-shipment border-bottom pb-3 mb-4">
                     <div class="custom-control custom-radio pl-0 pr-3">
                         <input type="radio" class="custom-control-input" name="send_type" id="radio1" wire:model="send_type"
-                               value="option1" checked>
+                               value="usual" checked>
                         <label for="radio1" class="custom-control-label">
                             عادی
                         </label>
@@ -134,9 +134,9 @@
                     @error('send_type')  <div class="alert alert-danger">{{$message}}</div> @enderror
                 </div>
                 <div class="section-title text-sm-title title-wide no-after-title-wide mb-0 px-res-1">
-                    <h2>مرسوله ۱ از ۱</h2>
+                    <h2>لیست محصولات در سبد خرید</h2>
                 </div>
-                <div class="checkout-pack">
+                <div class="checkout-pack" wire:ignore>
                     <section class="products-compact">
                         <!-- Start Product-Slider -->
                         <div class="col-12">
@@ -185,14 +185,14 @@
                                          role="tabpanel" aria-labelledby="home-tab">
                                             <div class="custom-control custom-radio pl-0 pr-3">
                                                 <input type="radio" class="custom-control-input" wire:model="receive_time"
-                                                       name="receive_time" id="radio4" value=" ساعت 12 تا 9">
+                                                       name="receive_time" id="radio4" value="9-12">
                                                 <label for="radio4" class="custom-control-label">
                                                     ساعت 12 تا 9
                                                 </label>
                                             </div>
                                         <div class="custom-control custom-radio pl-0 pr-3">
                                             <input type="radio" class="custom-control-input" wire:model="receive_time"
-                                                   name="receive_time" id="radio5" value="ساعت 18 تا 14">
+                                                   name="receive_time" id="radio5" value="14-18">
                                             <label for="radio5" class="custom-control-label">
                                                 ساعت 18 تا 14
                                             </label>
@@ -282,15 +282,15 @@
         <div class="dt-sn dt-sn--box checkout-feature-aside pt-4">
             <ul>
                 <li class="checkout-feature-aside-item">
-                    <img src="./assets/img/svg/return-policy.svg" alt="">
+                    <img src="{{url('frontend/img/svg/return-policy.svg')}}" alt="">
                     هفت روز ضمانت تعویض
                 </li>
                 <li class="checkout-feature-aside-item">
-                    <img src="./assets/img/svg/payment-terms.svg" alt="">
+                    <img src="{{url('frontend/img/svg/payment-terms.svg')}}" alt="">
                     پرداخت در محل با کارت بانکی
                 </li>
                 <li class="checkout-feature-aside-item">
-                    <img src="./assets/img/svg/delivery.svg" alt="">
+                    <img src="{{url('frontend/img/svg/delivery.svg')}}" alt="">
                     تحویل اکسپرس
                 </li>
             </ul>

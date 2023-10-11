@@ -111,12 +111,24 @@
                         </div>
                         <p>با ثبت کد کارت هدیه، مبلغ کارت هدیه از “مبلغ قابل پرداخت” کسر می‌شود.</p>
                         <div class="form-ui">
-                            <form action="">
+                            <form wire:submit.prevent="checkGiftCartCode">
                                 <div class="row text-center">
                                     <div class="col-xl-8 col-lg-12 px-0">
                                         <div class="form-row">
-                                            <input type="text" class="input-ui pr-2"
+                                            <input type="text" class="input-ui pr-2" wire:model.defer="gift_cart_code"
                                                    placeholder="مثلا 1234ABCD5678EFGH0123">
+                                        </div>
+                                        <div>
+                                            @if(session()->has('success_gift_cart'))
+                                                <div class="alert alert-success">
+                                                    {{session('success_gift_cart')}}
+                                                </div>
+                                            @endif
+                                            @if(session()->has('failed_gift_cart'))
+                                                <div class="alert alert-danger">
+                                                    {{session('failed_gift_cart')}}
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-xl-4 col-lg-12 px-0">
@@ -140,12 +152,24 @@
                         </div>
                         <p>با ثبت کد تخفیف، مبلغ کد تخفیف از “مبلغ قابل پرداخت” کسر می‌شود.</p>
                         <div class="form-ui">
-                            <form action="">
+                            <form wire:submit.prevent="checkDiscountCode">
                                 <div class="row text-center">
                                     <div class="col-xl-8 col-lg-12 px-0">
                                         <div class="form-row">
-                                            <input type="text" class="input-ui pr-2"
+                                            <input type="text" class="input-ui pr-2" wire:model.defer="discount_code"
                                                    placeholder="مثلا 837A2CS">
+                                        </div>
+                                        <div>
+                                            @if(session()->has('success_discount'))
+                                                <div class="alert alert-success">
+                                                    {{session('success_discount')}}
+                                                </div>
+                                            @endif
+                                            @if(session()->has('failed_discount'))
+                                                    <div class="alert alert-danger">
+                                                        {{session('failed_discount')}}
+                                                    </div>
+                                           @endif
                                         </div>
                                     </div>
                                     <div class="col-xl-4 col-lg-12 px-0">
@@ -174,10 +198,6 @@
                 <li class="checkout-summary-discount">
                     <span>سود شما از خرید</span><span>{{number_format($discount_price)}} تومان</span>
                 </li>
-                <li class="checkout-summary-discount">
-                    <span>میزان تخفیف</span><span> تومان</span>
-                </li>
-
             </ul>
             <div class="checkout-summary-devider">
                 <div></div>
@@ -187,7 +207,7 @@
                 <div class="checkout-summary-price-value">
                     <span class="checkout-summary-price-value-amount">{{number_format($total_price)}}</span>تومان
                 </div>
-                <a href="#" class="mb-2 d-block">
+                <a href="{{route('payment')}}" class="mb-2 d-block">
                     <button class="btn-primary-cm btn-with-icon w-100 text-center pr-0 pl-0">
                         <i class="mdi mdi-arrow-left"></i>
                         پرداخت و ثبت نهایی سفارش
@@ -208,15 +228,15 @@
         <div class="dt-sn dt-sn--box checkout-feature-aside pt-4">
             <ul>
                 <li class="checkout-feature-aside-item">
-                    <img src="./assets/img/svg/return-policy.svg" alt="">
+                    <img src="{{url('frontend/img/svg/return-policy.svg')}}" alt="">
                     هفت روز ضمانت تعویض
                 </li>
                 <li class="checkout-feature-aside-item">
-                    <img src="./assets/img/svg/payment-terms.svg" alt="">
+                    <img src="{{url('frontend/img/svg/payment-terms.svg')}}" alt="">
                     پرداخت در محل با کارت بانکی
                 </li>
                 <li class="checkout-feature-aside-item">
-                    <img src="./assets/img/svg/delivery.svg" alt="">
+                    <img src="{{url('frontend/img/svg/delivery.svg')}}" alt="">
                     تحویل اکسپرس
                 </li>
             </ul>

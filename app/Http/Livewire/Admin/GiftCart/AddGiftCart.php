@@ -32,14 +32,11 @@ class AddGiftCart extends Component
         Orwhere('mobile','like','%'.$this->search.'%')->
         Orwhere('email','like','%'.$this->search.'%')->
         get();
-
-        $this->dispatchBrowserEvent('refreshDatePicker');
     }
 
     public function selectUser($user)
     {
         $this->selected_user=$user;
-        $this->dispatchBrowserEvent('refreshDatePicker');
     }
 
     public function addGiftCart()

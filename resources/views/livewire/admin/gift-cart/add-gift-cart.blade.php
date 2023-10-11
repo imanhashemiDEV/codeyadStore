@@ -113,38 +113,18 @@
 @section('scripts')
 
     <script>
-
-        window.addEventListener('refreshDatePicker',event=>{
-            var customOptions = {
-                placeholder: "روز / ماه / سال"
-                , twodigit: false
-                , closeAfterSelect: true
-                , nextButtonIcon: "fa fa-arrow-circle-right"
-                , previousButtonIcon: "fa fa-arrow-circle-left"
-                , buttonsColor: "#5867dd"
-                , markToday: true
-                , markHolidays: true
-                , highlightSelectedDay: true
-                , sync: true
-                , gotoToday: true
-            }
-            kamaDatepicker('expiration_date', customOptions);
-        })
-
-        var customOptions = {
-            placeholder: "روز / ماه / سال"
-            , twodigit: false
-            , closeAfterSelect: true
-            , nextButtonIcon: "fa fa-arrow-circle-right"
-            , previousButtonIcon: "fa fa-arrow-circle-left"
-            , buttonsColor: "#5867dd"
-            , markToday: true
-            , markHolidays: true
-            , highlightSelectedDay: true
-            , sync: true
-            , gotoToday: true
-        }
-        kamaDatepicker('expiration_date', customOptions);
+        $(document).ready(function() {
+            $("#expiration_date").persianDatepicker({
+                observer: true,
+                initialValueType: 'persian',
+                format: 'YYYY/MM/DD',
+                initialValue: true,
+                autoClose: true,
+                onSelect: function(unix){
+                    @this.set('expiration_date', new persianDate(unix).format('YYYY/MM/DD'), true);
+                }
+            });
+        });
     </script>
 
 
