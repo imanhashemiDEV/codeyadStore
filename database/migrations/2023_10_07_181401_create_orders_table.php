@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('transaction_id')->nullable();
             $table->double('total_price')->default(0);
             $table->timestamp('receive_date');
+            $table->string('receive_time');
             $table->string('send_type');
             $table->double('discount_price')->nullable();
             $table->string('discount_code')->nullable();

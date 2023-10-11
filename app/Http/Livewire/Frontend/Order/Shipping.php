@@ -10,6 +10,7 @@ use App\Models\ProductGuaranty;
 use App\Models\Province;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class Shipping extends Component
@@ -48,6 +49,13 @@ class Shipping extends Component
     public function submitOrderInfo()
     {
         $this->validate();
+        $shop_data=[];
+        $shop_data['receive_time']=$this->receive_time;
+        $shop_data['receive_day']=$this->receive_day;
+        $shop_data['request_factor']=$this->request_factor;
+        $shop_data['send_type']=$this->send_type;
+
+        Session::put('shop_data',$shop_data);
         return redirect()->route('user.shipping.payment');
     }
 
@@ -65,7 +73,7 @@ class Shipping extends Component
             ->where('is_default',true)->first();
         $this->send_price = $this->selected_address->city->send_price;
         $this->send_day = $this->selected_address->city->send_day;
-        $carts = Cart::query()->where('type',CartType::Main->value)->get();
+        $carts = Cart::query()->where('user_id',auth()->user()->id)-> where('type',CartType::Main->value)->get();
         $total_price=0;
         $discount_price=0;
         foreach ($carts as $cart ){

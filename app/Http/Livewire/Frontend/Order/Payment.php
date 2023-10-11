@@ -9,6 +9,7 @@ use App\Models\GiftCart;
 use App\Models\PaymentType;
 use App\Models\ProductGuaranty;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class Payment extends Component
@@ -26,7 +27,7 @@ class Payment extends Component
     {
         $this->payment_type = 1;
         $this->payment_types = PaymentType::query()->get();
-        $this->carts = Cart::query()->where('type', CartType::Main->value)->get();
+        $this->carts = Cart::query()->where('user_id', auth()->user()->id)->where('type', CartType::Main->value)->get();
         $this->total_price = 0;
         $this->discount_price = 0;
         foreach ($this->carts as $cart) {
@@ -75,6 +76,11 @@ class Payment extends Component
 
     public function render()
     {
+        $shop_data = Session::get('shop_data');
+        $shop_data['payment_type']=$this->payment_type;
+        $shop_data['discount_code']=$this->discount_code;
+        $shop_data['gift_cart_code']=$this->gift_cart_code;
+        Session::put('shop_data',$shop_data);
         return view('livewire.frontend.order.payment');
     }
 }

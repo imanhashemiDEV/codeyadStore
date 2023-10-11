@@ -48,4 +48,15 @@ class Cart extends Model
           return $product->price;
       }
     }
+
+    public function productMainPrice($product_id,$color_id,$guaranty_id)
+    {
+        $product =  ProductGuaranty::query()->where('product_id',$product_id)
+            ->where('color_id',$color_id)
+            ->where('guaranty_id',$guaranty_id)
+            ->first();
+        if($product){
+            return $product->main_price;
+        }
+    }
 }
