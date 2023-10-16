@@ -32,7 +32,8 @@
     "autoload": {
         "files": [
             "app/Helpers/ImageManager.php",
-            "app/Helpers/DateManager.php"
+            "app/Helpers/DateManager.php",
+            "app/Helpers/UniqueCodeGenerator.php"
         ],
         "psr-4": {
             "App\\": "app/",
