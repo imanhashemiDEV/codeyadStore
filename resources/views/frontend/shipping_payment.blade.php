@@ -8,7 +8,7 @@
                     <div class="col-12 text-center pt-2">
                         <div class="header-shopping-logo dt-sl">
                             <a href="#">
-                                <img src="./assets/img/logo.png" alt="">
+                                <img src="{{url('frontend/img/logo.png')}}" alt="">
                             </a>
                         </div>
                     </div>

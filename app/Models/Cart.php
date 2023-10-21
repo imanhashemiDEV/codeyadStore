@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\CartType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -58,5 +59,11 @@ class Cart extends Model
         if($product){
             return $product->main_price;
         }
+    }
+
+    public static function getUserCart($user)
+    {
+       return Cart::query()->where('user_id', $user->id)->
+        where('type', CartType::Main->value)->get();
     }
 }

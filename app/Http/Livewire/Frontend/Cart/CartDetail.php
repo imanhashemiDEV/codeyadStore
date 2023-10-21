@@ -20,7 +20,12 @@ class CartDetail extends Component
             ->where('color_id',$color_id)
             ->where('guaranty_id',$guaranty_id)
             ->first();
-        if($cart &&   $cart->count < $cart->product->max_sell ){
+        $product_guaranty = ProductGuaranty::query()
+            ->where('product_id',$product_id)
+            ->where('color_id',$color_id)
+            ->where('guaranty_id',$guaranty_id)
+            ->first();
+        if($cart &&   $cart->count < $cart->product->max_sell && $product_guaranty->count > $cart->count){
             $cart->update([
                 'count'=>$cart->count + 1
             ]);

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('payment_types', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('driver');
             $table->timestamps();
         });
     }
