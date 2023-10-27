@@ -13,11 +13,27 @@ class Categories extends Component
 
     protected $paginationTheme = 'bootstrap';
     public $search;
+    public $categories;
+    public $searched_categories=[];
 
     protected $listeners = [
         'destroyCategory',
         'refreshComponent' => '$refresh'
     ];
+
+    public function mount()
+    {
+         $this->categories= Category::query()->
+        where('parent_id',0)->get();
+    }
+
+    public function updatingSearch($value)
+    {
+        $this->searched_categories =  Category::query()->
+            where('title','like','%'.$value.'%')
+            ->get();
+
+    }
 
     public function deleteCategory($id)
     {
@@ -31,10 +47,6 @@ class Categories extends Component
     }
     public function render()
     {
-        $categories = Category::query()->
-        where('title','like','%'.$this->search.'%')->
-        Orwhere('etitle','like','%'.$this->search.'%')->
-        paginate(20);
-        return view('livewire.admin.category.categories', compact('categories'));
+        return view('livewire.admin.category.categories');
     }
 }

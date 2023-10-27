@@ -29,8 +29,7 @@ return new class extends Migration
             $table->double('gift_cart_price')->nullable();
             $table->string('gift_cart_code')->nullable();
             $table->integer('post_number')->nullable();
-            $table->unsignedBigInteger('payment_type_id');
-            $table->foreign('payment_type_id')->references('id')->on('payment_types')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('payment_type');
             $table->softDeletes();
             $table->timestamps();
         });

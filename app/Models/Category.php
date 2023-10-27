@@ -26,7 +26,7 @@ class Category extends Model
     {
         return $this->belongsTo(self::class, 'parent_id', 'id')
             ->withTrashed()
-            ->withDefault(['title'=>"---"]);
+            ->withDefault(['title'=>"دسته اصلی"]);
     }
 
     public function childCategory()
@@ -80,6 +80,19 @@ class Category extends Model
                 foreach ($category2->childCategory as $category3){
                     $array[$category3->id]= ' - - ' . $category3->title;
                 }
+            }
+        }
+
+        return $array;
+    }
+
+    public static function getLevel2Categories()
+    {
+        $array = [];
+        $categories = self::query()->with('childCategory')->where('parent_id',0)->get();
+        foreach ($categories as $category1){
+            foreach ($category1->childCategory as $category2){
+                $array[$category2->id]= ' - ' . $category2->title;
             }
         }
 

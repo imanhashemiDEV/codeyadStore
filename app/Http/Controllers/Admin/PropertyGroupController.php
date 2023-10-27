@@ -28,7 +28,7 @@ class PropertyGroupController extends Controller
     public function create()
     {
         $title = "ایجاد گروه ویژگی ها ";
-        $categories = Category::getCategories();
+        $categories = Category::getLevel2Categories();
         return view('admin.property_groups.create', compact('title', 'categories'));
     }
 

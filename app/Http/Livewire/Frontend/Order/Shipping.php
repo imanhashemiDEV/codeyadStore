@@ -26,6 +26,11 @@ class Shipping extends Component
 
     public $selected_day_index=0;
 
+    public $carts;
+    public $total_price;
+    public $discount_price;
+
+
     protected $listeners = [
         'refreshCart' => '$refresh',
     ];
@@ -37,13 +42,23 @@ class Shipping extends Component
 
     public function mount()
     {
-        if(Carbon::now()->addDays($this->send_day)->dayOfWeek != CarbonInterface::FRIDAY){
-            $this->receive_day = Carbon::now()->addDays($this->send_day+1) ;
-            $this->selected_day_index = 0;
-        }
-         $this->receive_day =  Carbon::now()->addDays($this->send_day);
+
+        $this->selected_day_index = 0;
         $this->send_type = "usual";
         $this->receive_time = "9-12";
+
+        $this->carts = Cart::query()->where('user_id',auth()->user()->id)-> where('type',CartType::Main->value)->get();
+        $total_price=0;
+        $discount_price=0;
+        foreach ($this->carts as $cart ){
+            $product = ProductGuaranty::query()->where([
+                'product_id'=>$cart->product_id,
+                'color_id'=>$cart->color_id,
+                'guaranty_id'=>$cart->guaranty_id,
+            ])->first();
+            $this->total_price += ($product->price) * $cart->count;
+            $this->discount_price += ($product->main_price - $product->price) * $cart->count;
+        }
     }
 
     public function submitOrderInfo()
@@ -73,22 +88,14 @@ class Shipping extends Component
             ->where('is_default',true)->first();
         $this->send_price = $this->selected_address->city->send_price;
         $this->send_day = $this->selected_address->city->send_day;
-        $carts = Cart::query()->where('user_id',auth()->user()->id)-> where('type',CartType::Main->value)->get();
-        $total_price=0;
-        $discount_price=0;
-        foreach ($carts as $cart ){
-            $product = ProductGuaranty::query()->where([
-                'product_id'=>$cart->product_id,
-                'color_id'=>$cart->color_id,
-                'guaranty_id'=>$cart->guaranty_id,
-            ])->first();
-            $total_price += ($product->price) * $cart->count;
-            $discount_price += ($product->main_price - $product->price) * $cart->count;
+        if(Carbon::now()->addDays($this->send_day)->dayOfWeek != CarbonInterface::FRIDAY){
+            $this->receive_day = Carbon::now()->addDays($this->send_day+1) ;
+            $this->selected_day_index = 0;
         }
+        $this->receive_day =  Carbon::now()->addDays($this->send_day);
+
 
         return view('livewire.frontend.order.shipping',
-            compact('carts','total_price',
-                'discount_price','addresses',
-            ));
+            compact('addresses'));
     }
 }

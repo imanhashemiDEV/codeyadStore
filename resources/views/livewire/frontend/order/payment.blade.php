@@ -11,9 +11,9 @@
                             @foreach($payment_types as $payment_type)
                                 <div class="col-12 mb-3">
                                     <div class="radio-box custom-control custom-radio pl-0 pr-3">
-                                        <input type="radio" class="custom-control-input" name="payment_type" wire:model="payment_type"
-                                               id="{{$payment_type->id}}" value="{{$payment_type->id}}" >
-                                        <label for="{{$payment_type->id}}" class="custom-control-label">
+                                        <input type="radio" class="custom-control-input" wire:model="payment_type"
+                                               id="{{$payment_type->driver}}" value="{{$payment_type->driver}}" >
+                                        <label for="{{$payment_type->driver}}" class="custom-control-label">
                                             <i
                                                 class="mdi mdi-credit-card-multiple-outline checkout-additional-options-checkbox-image"></i>
                                             <div class="content-box">

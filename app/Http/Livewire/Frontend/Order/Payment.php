@@ -25,7 +25,7 @@ class Payment extends Component
 
     public function mount()
     {
-        $this->payment_type = 1;
+        $this->payment_type ='zarinpal';
         $this->payment_types = PaymentType::query()->get();
         $this->carts = Cart::query()->where('user_id', auth()->user()->id)->where('type', CartType::Main->value)->get();
         $this->total_price = 0;
@@ -46,6 +46,7 @@ class Payment extends Component
         //  gWm0RY
         $discount = Discount::query()
             ->where('code', $this->discount_code)
+            ->where('discount', '>',0)
             ->where('expiration_date','>=', Carbon::now()->toDateTimeString())
             ->first();
         if ($discount) {
@@ -63,6 +64,7 @@ class Payment extends Component
         $gift_cart = GiftCart::query()
             ->where('code', $this->gift_cart_code)
             ->where('user_id', auth()->user()->id)
+            ->where('gift_price', '>',0)
             ->where('expiration_date','>=', Carbon::now()->toDateTimeString())
             ->first();
         if ($gift_cart) {

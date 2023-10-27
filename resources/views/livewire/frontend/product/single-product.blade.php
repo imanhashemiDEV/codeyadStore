@@ -63,6 +63,7 @@
                             </div>
                             <ul class="product-variants float-right ml-3">
                                 @foreach($product->colors as $color)
+                                    @if($product->productGuaranties()->where('color_id',$color->id)->where('count','>',0)->first())
                                     <li class="ui-variant" wire:click="changeProduct({{$color->id}})">
                                         <label class="ui-variant ui-variant--color">
                                                         <span class="ui-variant-shape"
@@ -72,6 +73,7 @@
                                             <span class="ui-variant--check">{{$color->title}}</span>
                                         </label>
                                     </li>
+                                    @endif
                                 @endforeach
                             </ul>
                         </div>

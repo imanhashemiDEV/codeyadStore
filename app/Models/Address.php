@@ -35,4 +35,10 @@ class Address extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    public static function getUserAddress($user)
+    {
+       return Address::query()->where('user_id', $user->id)
+            ->where('is_default', true)->first();
+    }
 }

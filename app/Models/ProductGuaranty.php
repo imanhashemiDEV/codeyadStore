@@ -130,4 +130,26 @@ class ProductGuaranty extends Model
             'special_expiration' => $request->input('special_start') != null ? DateManager::shamsi_to_miladi($request->input('special_expiration')) : null,
         ]);
     }
+
+    public static function getProductInCart($cart)
+    {
+      return  ProductGuaranty::query()
+            ->where('product_id',$cart->product_id)
+            ->where('color_id',$cart->color_id)
+            ->where('guaranty_id',$cart->guaranty_id)
+            ->first();
+    }
+    public static function calculateTotalPriceInCart($carts,$total_price)
+    {
+        foreach ($carts as $cart) {
+            $product = ProductGuaranty::query()->where([
+                'product_id' => $cart->product_id,
+                'color_id' => $cart->color_id,
+                'guaranty_id' => $cart->guaranty_id,
+            ])->first();
+            $total_price += ($product->price) * $cart->count;
+        }
+
+        return $total_price;
+    }
 }
