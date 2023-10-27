@@ -4,6 +4,7 @@ namespace App\Http\Controllers\FrontEnd;
 
 use App\Enums\CartType;
 use App\Models\Cart;
+use App\Models\Category;
 use App\Models\City;
 use Melipayamak;
 use App\Http\Controllers\Controller;
