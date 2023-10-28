@@ -8,11 +8,14 @@ require __DIR__.'/auth.php';
     //--- Main Route --//
 
     Route::get('/',[\App\Http\Controllers\FrontEnd\HomeController::class,'home'])->name('home');
-    Route::get('/product_details/{slug}',[\App\Http\Controllers\FrontEnd\HomeController::class,'singleProduct'])->name('single.product');
     Route::get('/payment/callback',[\App\Http\Controllers\FrontEnd\PaymentController::class,'callback'])->name('payment');
 
+    Route::get('/product_details/{slug}',[\App\Http\Controllers\FrontEnd\ProductController::class,'singleProduct'])->name('single.product');
+    Route::get('/main/{main_category_slug}',[\App\Http\Controllers\FrontEnd\ProductController::class,'mainCategoryProductList'])->name('main.category.product.list');
+    Route::get('/search/{sub_category_slug}/{child_category_slug?}',[\App\Http\Controllers\FrontEnd\ProductController::class,'searchCategoryProductList'])->name('search.category.product.list');
 
-    Route::middleware('auth')->group(function (){
+
+Route::middleware('auth')->group(function (){
         Route::get('/cart',[\App\Http\Controllers\FrontEnd\HomeController::class,'cart'])->name('user.cart');
         Route::get('/shipping',[\App\Http\Controllers\FrontEnd\HomeController::class,'shipping'])->name('user.shipping');
         Route::get('/shipping_payment',[\App\Http\Controllers\FrontEnd\HomeController::class,'shippingPayment'])->name('user.shipping.payment');

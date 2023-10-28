@@ -40,13 +40,7 @@ class HomeController extends Controller
                 'special_products', 'brands', 'newest_products'));
     }
 
-    public function singleProduct($slug)
-    {
-        $product = Product::query()
-            ->with(['category', 'brand', 'colors', 'properties', 'propertyGroups', 'galleries'])
-            ->where('slug', $slug)->first();
-        return view('frontend.single_product', compact('product'));
-    }
+
 
     public function cart()
     {
