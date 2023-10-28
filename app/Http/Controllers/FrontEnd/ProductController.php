@@ -17,14 +17,17 @@ class ProductController extends Controller
         return view('frontend.single_product', compact('product'));
     }
 
-    public function mainCategoryProductList($slug)
+    public function mainCategoryProductList($main_category_slug)
     {
-        return view('frontend.product_list',compact('slug'));
+        $sub_category_slug=null;
+        $child_category_slug=null;
+        return view('frontend.product_list',compact('main_category_slug','sub_category_slug','child_category_slug'));
     }
 
 
-    public function searchCategoryProductList($slug)
+    public function searchCategoryProductList($sub_category_slug,$child_category_slug=null)
     {
-
+        $main_category_slug=null;
+        return view('frontend.product_list',compact('main_category_slug','sub_category_slug','child_category_slug'));
     }
 }

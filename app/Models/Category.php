@@ -133,7 +133,7 @@ class Category extends Model
         });
     }
 
-    public static function getProductsByCategory($slug)
+    public static function getProductsByMainCategory($slug)
     {
         $category = Category::query()->where('slug',$slug)->first();
         $catList =[];
@@ -147,6 +147,24 @@ class Category extends Model
             }
         }
        return Product::query()->whereIn('category_id',$catList)->get();
+    }
+
+    public static function getProductsBySubCategory($slug)
+    {
+        $category = Category::query()->where('slug',$slug)->first();
+        $catList =[];
+        if(sizeof($category->childCategory) > 0 ) {
+            foreach ($category->childCategory as $cat1) {
+                array_push($catList, $cat1->id);
+            }
+        }
+        return Product::query()->whereIn('category_id',$catList)->get();
+    }
+
+    public static function getProductsByChildCategory($slug)
+    {
+        $category = Category::query()->where('slug',$slug)->first();
+        return Product::query()->where('category_id',$category->id)->get();
     }
 
 }

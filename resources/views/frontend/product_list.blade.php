@@ -251,7 +251,7 @@
                 </div>
                 <!-- End Sidebar -->
                 <!-- Start Content -->
-                <livewire:frontend.product.products :slug="$slug"/>
+                <livewire:frontend.product.products :main_slug="$main_category_slug" :sub_slug="$sub_category_slug" :child_slug="$child_category_slug"/>
                 <!-- End Content -->
             </div>
         </div>
