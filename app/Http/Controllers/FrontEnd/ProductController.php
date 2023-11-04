@@ -14,6 +14,7 @@ class ProductController extends Controller
         $product = Product::query()
             ->with(['category', 'brand', 'colors', 'properties', 'propertyGroups', 'galleries'])
             ->where('slug', $slug)->first();
+        $product->increment('viewed');
         return view('frontend.single_product', compact('product'));
     }
 
