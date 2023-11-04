@@ -133,7 +133,17 @@ class Category extends Model
         });
     }
 
-    public static function getProductsByMainCategory($slug)
+    public static function getProductByCategory($main_slug,$sub_slug,$child_slug,$column,$orderBy)
+    {
+        if($main_slug !=null &&  $sub_slug==null &&  $child_slug==null){
+           return Category::getProductsByMainCategory($main_slug,$column,$orderBy);
+        }elseif ($main_slug ==null &&  $sub_slug!=null &&  $child_slug==null){
+            return Category::getProductsBySubCategory($sub_slug,$column,$orderBy);
+        }elseif ($main_slug ==null &&  $sub_slug!=null &&  $child_slug!=null){
+            return Category::getProductsByChildCategory($child_slug,$column,$orderBy);
+        }
+    }
+    public static function getProductsByMainCategory($slug,$column,$orderBy)
     {
         $category = Category::query()->where('slug',$slug)->first();
         $catList =[];
@@ -146,10 +156,12 @@ class Category extends Model
                 }
             }
         }
-       return Product::query()->whereIn('category_id',$catList)->get();
+       return Product::query()->whereIn('category_id',$catList)
+           ->orderBy($column,$orderBy)
+           ->paginate(1);
     }
 
-    public static function getProductsBySubCategory($slug)
+    public static function getProductsBySubCategory($slug,$column,$orderBy)
     {
         $category = Category::query()->where('slug',$slug)->first();
         $catList =[];
@@ -158,13 +170,17 @@ class Category extends Model
                 array_push($catList, $cat1->id);
             }
         }
-        return Product::query()->whereIn('category_id',$catList)->get();
+        return Product::query()->whereIn('category_id',$catList)
+            ->orderBy($column,$orderBy)
+            ->paginate(1);
     }
 
-    public static function getProductsByChildCategory($slug)
+    public static function getProductsByChildCategory($slug,$column,$orderBy)
     {
         $category = Category::query()->where('slug',$slug)->first();
-        return Product::query()->where('category_id',$category->id)->get();
+        return Product::query()->where('category_id',$category->id)
+            ->orderBy($column,$orderBy)
+            ->paginate(1);
     }
 
 }
