@@ -63,7 +63,7 @@
                 <div class="row">
                     <div class="col-12">
                         @if(count($products)>0)
-                        {{$products->links('vendor.pagination.products-pagination')}}
+                        {{$products->links('vendor.pagination.products-pagination.all-products')}}
                         @endif
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                                     <h5 class="product-title">
                                         <a href="{{route('single.product',$product->slug)}}"> {{$product->title}}</a>
                                     </h5>
-                                    <a class="product-meta" href="shop-categories.html">{{$product->category->title}}</a>
+                                    <a class="product-meta" href="#">{{$product->category->title}}</a>
                                     <span class="product-price">{{$product->price}}تومان</span>
                                 </div>
                             </div>
@@ -115,7 +115,7 @@
                 <div class="row">
                     <div class="col-12">
                         @if(count($moreViewedProducts)>0)
-                        {{$moreViewedProducts->withQueryString()->links('vendor.pagination.products-pagination')}}
+                        {{$moreViewedProducts->withQueryString()->links('vendor.pagination.products-pagination.more-viewed-products')}}
                         @endif
                     </div>
                 </div>
@@ -157,7 +157,7 @@
                                     <h5 class="product-title">
                                         <a href="{{route('single.product',$product->slug)}}"> {{$product->title}}</a>
                                     </h5>
-                                    <a class="product-meta" href="shop-categories.html">{{$product->category->title}}</a>
+                                    <a class="product-meta" href="#">{{$product->category->title}}</a>
                                     <span class="product-price">{{$product->price}}تومان</span>
                                 </div>
                             </div>
@@ -167,7 +167,7 @@
                 <div class="row">
                     <div class="col-12">
                         @if(count($newestProducts)>0)
-                        {{$newestProducts->links('vendor.pagination.products-pagination')}}
+                        {{$newestProducts->links('vendor.pagination.products-pagination.newest-products')}}
                         @endif
                     </div>
                 </div>
@@ -209,7 +209,7 @@
                                     <h5 class="product-title">
                                         <a href="{{route('single.product',$product->slug)}}"> {{$product->title}}</a>
                                     </h5>
-                                    <a class="product-meta" href="shop-categories.html">{{$product->category->title}}</a>
+                                    <a class="product-meta" href="#">{{$product->category->title}}</a>
                                     <span class="product-price">{{$product->price}}تومان</span>
                                 </div>
                             </div>
@@ -219,7 +219,7 @@
                 <div class="row">
                     <div class="col-12">
                         @if(count($moreSoldProducts)>0)
-                        {{$moreSoldProducts->links('vendor.pagination.products-pagination')}}
+                        {{$moreSoldProducts->links('vendor.pagination.products-pagination.more-sold-products')}}
                         @endif
                     </div>
                 </div>
@@ -261,7 +261,7 @@
                                     <h5 class="product-title">
                                         <a href="{{route('single.product',$product->slug)}}"> {{$product->title}}</a>
                                     </h5>
-                                    <a class="product-meta" href="shop-categories.html">{{$product->category->title}}</a>
+                                    <a class="product-meta" href="#">{{$product->category->title}}</a>
                                     <span class="product-price">{{$product->price}}تومان</span>
                                 </div>
                             </div>
@@ -271,7 +271,7 @@
                 <div class="row">
                     <div class="col-12">
                         @if(count($cheapestProducts)>0)
-                        {{$cheapestProducts->links('vendor.pagination.products-pagination')}}
+                        {{$cheapestProducts->links('vendor.pagination.products-pagination.cheapest-products')}}
                         @endif
                     </div>
                 </div>
@@ -313,7 +313,7 @@
                                     <h5 class="product-title">
                                         <a href="{{route('single.product',$product->slug)}}"> {{$product->title}}</a>
                                     </h5>
-                                    <a class="product-meta" href="shop-categories.html">{{$product->category->title}}</a>
+                                    <a class="product-meta" href="#">{{$product->category->title}}</a>
                                     <span class="product-price">{{$product->price}}تومان</span>
                                 </div>
                             </div>
@@ -321,9 +321,11 @@
                     @endforeach
                 </div>
                 <div class="row">
+                    <div class="col-12">
                     @if(count($mostExpensiveProducts)>0)
-                    {{$mostExpensiveProducts->links('vendor.pagination.products-pagination')}}
+                    {{$mostExpensiveProducts->links('vendor.pagination.products-pagination.most-expensive-products')}}
                     @endif
+                    </div>
                 </div>
             </div>
         </div>

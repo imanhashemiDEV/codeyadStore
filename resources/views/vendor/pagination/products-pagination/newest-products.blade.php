@@ -12,7 +12,7 @@
                             @if ($page == $paginator->currentPage())
                                 <a href="#" class="active-page">{{ $page }}</a>
                             @else
-                                <a href="" wire:click.prevent="changePage({{$page}},1)">{{$page}}</a>
+                                <a href="" wire:click.prevent="changePage({{$page}},3)">{{$page}}</a>
                             @endif
                         @endforeach
                     @endif
