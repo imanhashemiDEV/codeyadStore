@@ -133,17 +133,17 @@ class Category extends Model
         });
     }
 
-    public static function getProductByCategory($main_slug,$sub_slug,$child_slug,$column,$orderBy)
+    public static function getProductByCategory($main_slug,$sub_slug,$child_slug,$column,$orderBy,$page)
     {
         if($main_slug !=null &&  $sub_slug==null &&  $child_slug==null){
-           return Category::getProductsByMainCategory($main_slug,$column,$orderBy);
+           return Category::getProductsByMainCategory($main_slug,$column,$orderBy,$page);
         }elseif ($main_slug ==null &&  $sub_slug!=null &&  $child_slug==null){
-            return Category::getProductsBySubCategory($sub_slug,$column,$orderBy);
+            return Category::getProductsBySubCategory($sub_slug,$column,$orderBy,$page);
         }elseif ($main_slug ==null &&  $sub_slug!=null &&  $child_slug!=null){
-            return Category::getProductsByChildCategory($child_slug,$column,$orderBy);
+            return Category::getProductsByChildCategory($child_slug,$column,$orderBy,$page);
         }
     }
-    public static function getProductsByMainCategory($slug,$column,$orderBy)
+    public static function getProductsByMainCategory($slug,$column,$orderBy,$page)
     {
         $category = Category::query()->where('slug',$slug)->first();
         $catList =[];
@@ -158,10 +158,10 @@ class Category extends Model
         }
        return Product::query()->whereIn('category_id',$catList)
            ->orderBy($column,$orderBy)
-           ->paginate(1);
+           ->paginate(12,['*'],'page',$page);
     }
 
-    public static function getProductsBySubCategory($slug,$column,$orderBy)
+    public static function getProductsBySubCategory($slug,$column,$orderBy,$page)
     {
         $category = Category::query()->where('slug',$slug)->first();
         $catList =[];
@@ -172,15 +172,15 @@ class Category extends Model
         }
         return Product::query()->whereIn('category_id',$catList)
             ->orderBy($column,$orderBy)
-            ->paginate(1);
+            ->paginate(12,['*'],'page',$page);
     }
 
-    public static function getProductsByChildCategory($slug,$column,$orderBy)
+    public static function getProductsByChildCategory($slug,$column,$orderBy,$page)
     {
         $category = Category::query()->where('slug',$slug)->first();
         return Product::query()->where('category_id',$category->id)
             ->orderBy($column,$orderBy)
-            ->paginate(1);
+            ->paginate(12,['*'],'page',$page);
     }
 
 }
