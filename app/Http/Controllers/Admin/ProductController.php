@@ -108,6 +108,14 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
+    public function ckeditor_image(Request $request)
+    {
+        if ($request->hasFile('upload') ){
+            $url = ImageManager::ckImage('products',$request->upload);
+            return response()->json(['url' => $url]);
+        }
+    }
+
     public function createProductProperties( Product $product)
     {
 

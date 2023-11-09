@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\Gallery;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -30,5 +31,22 @@ class ImageManager
         $path_big = public_path(). "/images/$table/big/".$object->image;
         unlink($path_small);
         unlink($path_big);
+    }
+
+
+    public static function ckImage($table,$image):string
+    {
+            $name = $image->hashName();
+            $smallImage = Image::make($image->getRealPath());
+            $bigImage = Image::make($image->getRealPath());
+            $smallImage->resize(256,256, function ($constraint){
+                $constraint->aspectRatio();
+            });
+
+            Storage::disk('local')->put($table.'/small/'.$name, (string) $smallImage->encode('png',90));
+            Storage::disk('local')->put($table.'/big/'.$name, (string) $bigImage->encode('png',90));
+
+
+        return  url("/images/$table/big/".$name);
     }
 }

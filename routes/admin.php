@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 //--- Main Route --//
 Route::get('/', [PanelController::class, 'index'])->name('panel');
 
+//Admin routes
 //-- Users Routes --//
 Route::resource('users', UserController::class);
 Route::resource('roles', RoleController::class);
@@ -56,6 +57,7 @@ Route::put('update_product_guarantees/{id}/{product_id}', [ProductGuarantyContro
 
 Route::get('create_product_gallery/{id}', [ProductController::class, 'addGallery'])->name('add.product.gallery');
 Route::post('store_product_gallery/{id}', [ProductController::class, 'storeGallery'])->name('store.product.gallery');
+Route::post('upload_ckeditor_image',[ProductController::class,'ckeditor_image'])->name('ckeditor.upload');
 
 Route::resource('property_groups', PropertyGroupController::class);
 

@@ -11,6 +11,7 @@ class PropertyGroup extends Model
     use HasFactory;
 
     protected $fillable =[
+        'id',
         'title',
         'category_id'
     ];
