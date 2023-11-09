@@ -1,4 +1,4 @@
-
+<script>
     $(document).ready(function () {
 
         //Define an adapter to upload the files
@@ -9,7 +9,7 @@
                 this.loader = loader;
 
                 // URL where to send files.
-                this.url = "{{ route('ckeditor.upload') }}";
+                this.url = '{{ route('ckeditor.upload') }}';
             }
 
             // Starts the upload process.
@@ -106,7 +106,7 @@
         }
 
         ClassicEditor
-            .create(document.querySelector('#editor1'), {
+            .create(document.querySelector('#editor'), {
                 extraPlugins: [SimpleUploadAdapterPlugin],
                 toolbar: {
                     items: [
@@ -144,48 +144,9 @@
                 console.log('Editor was initialized', editor);
             })
             .catch(error => {
-               // console.error(error.stack);
-            });
-
-        ClassicEditor
-            .create(document.querySelector('#editor'), {
-                extraPlugins: [SimpleUploadAdapterPlugin],
-                toolbar: {
-                    items: [
-                        'heading',
-                        '|',
-                        'bold',
-                        'italic',
-                        'link',
-                        '|',
-                        'fontSize',
-                        'fontColor',
-                        '|',
-                        'imageUpload',
-                        'blockQuote',
-                        'insertTable',
-                        'undo',
-                        'redo',
-                        'codeBlock'
-                    ]
-                },
-                language: {
-                    ui: 'fa',
-                    content: 'fa'
-                },
-                table: {
-                    contentToolbar: [
-                        'tableColumn',
-                        'tableRow',
-                        'mergeTableCells'
-                    ]
-                },
-
-            })
-            .then(editor => {
-                console.log('Editor was initialized', editor);
+                console.error(error.stack);
             });
 
     });
-
+</script>
 

@@ -156,9 +156,16 @@ class Category extends Model
                 }
             }
         }
-       return Product::query()->whereIn('category_id',$catList)
-           ->orderBy($column,$orderBy)
-           ->paginate(12,['*'],'page',$page);
+        if($page){
+            return Product::query()->whereIn('category_id',$catList)
+                ->orderBy($column,$orderBy)
+                ->paginate(12,['*'],'page',$page);
+        }else{
+           return Product::query()->whereIn('category_id',$catList)
+                ->orderBy($column,$orderBy)
+                ->get();
+        }
+
     }
 
     public static function getProductsBySubCategory($slug,$column,$orderBy,$page)
@@ -170,17 +177,33 @@ class Category extends Model
                 array_push($catList, $cat1->id);
             }
         }
-        return Product::query()->whereIn('category_id',$catList)
-            ->orderBy($column,$orderBy)
-            ->paginate(12,['*'],'page',$page);
+
+        if($page){
+            return Product::query()->whereIn('category_id',$catList)
+                ->orderBy($column,$orderBy)
+                ->paginate(12,['*'],'page',$page);
+        }else{
+            return Product::query()->whereIn('category_id',$catList)
+                ->orderBy($column,$orderBy)
+                ->get();
+        }
+
     }
 
     public static function getProductsByChildCategory($slug,$column,$orderBy,$page)
     {
         $category = Category::query()->where('slug',$slug)->first();
-        return Product::query()->where('category_id',$category->id)
-            ->orderBy($column,$orderBy)
-            ->paginate(12,['*'],'page',$page);
+
+        if($page){
+            return Product::query()->where('category_id',$category->id)
+                ->orderBy($column,$orderBy)
+                ->paginate(12,['*'],'page',$page);
+        }else{
+            return Product::query()->where('category_id',$category->id)
+                ->orderBy($column,$orderBy)
+                ->get();
+        }
+
     }
 
 }

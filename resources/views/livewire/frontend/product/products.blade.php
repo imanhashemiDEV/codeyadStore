@@ -7,7 +7,7 @@
     <div class="dt-sl dt-sn px-0 search-amazing-tab">
         <div class="ah-tab-wrapper dt-sl">
             <div class="ah-tab dt-sl">
-                <a class="ah-tab-item" wire:click.prevent="allProducts" @if(count($products)>0) data-ah-tab-active="true" @endif  href="">مرتبط ترین</a>
+                <a class="ah-tab-item" wire:click.prevent="mount" @if(count($products)>0) data-ah-tab-active="true" @endif  href="">مرتبط ترین</a>
                 <a class="ah-tab-item" wire:click.prevent="moreViewedProducts" @if(count($moreViewedProducts)>0) data-ah-tab-active="true" @endif  href="">پربازدید ترین</a>
                 <a class="ah-tab-item" wire:click.prevent="newestProducts"  @if(count($newestProducts)>0) data-ah-tab-active="true" @endif href="">جدید ترین</a>
                 <a class="ah-tab-item" wire:click.prevent="moreSoldProducts"  @if(count($moreSoldProducts)>0) data-ah-tab-active="true" @endif href="">پرفروش ترین</a>
@@ -53,7 +53,7 @@
                                     <h5 class="product-title">
                                         <a href="{{route('single.product',$product->slug)}}"> {{$product->title}}</a>
                                     </h5>
-                                    <a class="product-meta" href="shop-categories.html">{{$product->category->title}}</a>
+                                    <a class="product-meta" href="#">{{$product->category->title}}</a>
                                     <span class="product-price">{{$product->price}}تومان</span>
                                 </div>
                             </div>

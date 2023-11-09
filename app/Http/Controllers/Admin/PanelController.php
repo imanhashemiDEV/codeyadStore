@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\ImageManager;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -11,4 +12,5 @@ class PanelController extends Controller
     {
         return view('admin.index');
     }
+
 }

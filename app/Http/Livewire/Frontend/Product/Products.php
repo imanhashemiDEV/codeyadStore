@@ -33,7 +33,6 @@ class Products extends Component
         $this->cheapestProducts =[];
         $this->mostExpensiveProducts =[];
     }
-
     public function allProducts()
     {
         $this->products =  Category::getProductByCategory($this->main_slug, $this->sub_slug, $this->child_slug,'id','DESC',$this->page);
