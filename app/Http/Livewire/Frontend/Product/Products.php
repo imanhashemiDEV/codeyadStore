@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Frontend\Product;
 
 use App\Models\Category;
+use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -24,6 +25,11 @@ class Products extends Component
     public $page=1;
 
     protected $pagination_theme = 'bootstrap';
+
+    protected $listeners=[
+        'filteredProducts'
+    ];
+
     public function mount()
     {
        $this->products =  Category::getProductByCategory($this->main_slug, $this->sub_slug, $this->child_slug,'id','DESC',$this->page);
@@ -42,7 +48,6 @@ class Products extends Component
         $this->cheapestProducts =[];
         $this->mostExpensiveProducts =[];
     }
-
     public function moreViewedProducts()
     {
         $this->products=[];
@@ -52,7 +57,6 @@ class Products extends Component
         $this->cheapestProducts =[];
         $this->mostExpensiveProducts =[];
     }
-
     public function newestProducts()
     {
         $this->products=[];
@@ -62,7 +66,6 @@ class Products extends Component
         $this->cheapestProducts =[];
         $this->mostExpensiveProducts =[];
     }
-
     public function moreSoldProducts()
     {
         $this->products=[];
@@ -72,7 +75,6 @@ class Products extends Component
         $this->cheapestProducts =[];
         $this->mostExpensiveProducts =[];
     }
-
     public function cheapestProducts()
     {
         $this->products=[];
@@ -82,8 +84,6 @@ class Products extends Component
         $this->cheapestProducts =Category::getProductByCategory($this->main_slug, $this->sub_slug, $this->child_slug,'price','ASC',$this->page);;
         $this->mostExpensiveProducts =[];
     }
-
-
     public function mostExpensiveProducts()
     {
         $this->products=[];
@@ -93,7 +93,6 @@ class Products extends Component
         $this->cheapestProducts =[];
         $this->mostExpensiveProducts =Category::getProductByCategory($this->main_slug, $this->sub_slug, $this->child_slug,'price','DESC',$this->page);;
     }
-
     public function changePage($page,$index)
     {
         $this->page=$page;
@@ -119,6 +118,23 @@ class Products extends Component
             default :
                 $this->allProducts();
         }
+    }
+
+    public function filteredProducts($brands,$guaranties,$colors)
+    {
+        if($this->main_slug){
+            $this->products =  Category::getProductsByMainCategory($this->main_slug,'id','DESC',$this->page,$brands,$guaranties,$colors);
+        }elseif ( $this->sub_slug){
+            $this->products =  Category::getProductsBySubCategory($this->sub_slug,'id','DESC',$this->page,$brands,$guaranties,$colors);
+        }elseif ($this->child_slug){
+            $this->products =  Category::getProductsByChildCategory($this->child_slug,'id','DESC',$this->page,$brands,$guaranties,$colors);
+        }
+
+        $this->moreViewedProducts =[];
+        $this->newestProducts =[];
+        $this->moreSoldProducts =[];
+        $this->cheapestProducts =[];
+        $this->mostExpensiveProducts =[];
     }
     public function render()
     {
