@@ -299,7 +299,7 @@
                                     </div>
                                 </div>
                                 <div class="other-seller" wire:ignore.self>
-                                    <a href="#product-seller-all">
+                                    <a href="#">
                                         <div class="product-seller-row-main">
                                                 <span class="font-weight-bold">
                                                     <span id="more-suppliers-count">۳</span>

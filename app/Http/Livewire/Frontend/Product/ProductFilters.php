@@ -11,14 +11,7 @@ use Livewire\Component;
 class ProductFilters extends Component
 {
 
-    public $main_slug;
-    public $sub_slug;
-    public $child_slug;
-
-    public $brands;
-    public $guaranties;
-
-    public $colors;
+    public $main_slug,$sub_slug,$child_slug,$brands,$guaranties,$colors;
 
     public $filtered_brands=[];
     public $filtered_guaranty=[];
@@ -27,7 +20,6 @@ class ProductFilters extends Component
 
     public function mount()
     {
-
         $products = Category::getProductByCategory($this->main_slug, $this->sub_slug, $this->child_slug, 'id', 'DESC', null);
         $brandsList = [];
         $guarantyList = [];
@@ -70,7 +62,6 @@ class ProductFilters extends Component
         }
 
         $this->emit('filteredProducts', $this->filtered_brands, $this->filtered_guaranty, $this->filtered_colors);
-
     }
 
     public function addGuaranties($guaranty_id)
