@@ -12,18 +12,11 @@ class Products extends Component
     use WithPagination;
 
     protected $paginationTheme='bootstrap';
-    private $products;
-    private $moreViewedProducts;
-    private $newestProducts;
-    private $moreSoldProducts;
-    private $cheapestProducts;
-    private $mostExpensiveProducts;
-    public $main_slug;
-    public $sub_slug;
-    public $child_slug;
-
+    private $products,$moreViewedProducts,$newestProducts,$moreSoldProducts,
+            $cheapestProducts,$mostExpensiveProducts;
+    public $main_slug,$sub_slug,$child_slug;
+    public $productList=[];
     public $page=1;
-
     protected $pagination_theme = 'bootstrap';
 
     protected $listeners=[
@@ -119,7 +112,6 @@ class Products extends Component
                 $this->allProducts();
         }
     }
-
     public function filteredProducts($brands,$guaranties,$colors)
     {
         if($this->main_slug){
@@ -136,6 +128,24 @@ class Products extends Component
         $this->cheapestProducts =[];
         $this->mostExpensiveProducts =[];
     }
+
+    public function compareProducts($product_id)
+    {
+        if (!in_array($product_id, $this->productList)) {
+            array_push($this->productList, $product_id);
+        }else{
+            if(($key=array_search($product_id,$this->productList)) !== false){
+                unset($this->productList[$key]);
+            }
+        }
+
+        if(count($this->productList)==2){
+            return redirect()->route('compare.products',[$this->productList[0],$this->productList[1]]);
+        }
+
+        $this->allProducts();
+    }
+
     public function render()
     {
         $products = $this->products;

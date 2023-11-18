@@ -7,7 +7,7 @@
     <div class="dt-sl dt-sn px-0 search-amazing-tab">
         <div class="ah-tab-wrapper dt-sl">
             <div class="ah-tab dt-sl">
-                <a class="ah-tab-item" wire:click.prevent="mount" @if(count($products)>0) data-ah-tab-active="true" @endif  href="">مرتبط ترین</a>
+                <a class="ah-tab-item" wire:click.prevent="allProducts" @if(count($products)>0) data-ah-tab-active="true" @endif  href="">مرتبط ترین</a>
                 <a class="ah-tab-item" wire:click.prevent="moreViewedProducts" @if(count($moreViewedProducts)>0) data-ah-tab-active="true" @endif  href="">پربازدید ترین</a>
                 <a class="ah-tab-item" wire:click.prevent="newestProducts"  @if(count($newestProducts)>0) data-ah-tab-active="true" @endif href="">جدید ترین</a>
                 <a class="ah-tab-item" wire:click.prevent="moreSoldProducts"  @if(count($moreSoldProducts)>0) data-ah-tab-active="true" @endif href="">پرفروش ترین</a>
@@ -43,11 +43,11 @@
                                 </a>
                                 <div class="product-card-body">
                                     <div class="add-to-compare">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input"
-                                                   id="customCheck100">
-                                            <label class="custom-control-label"
-                                                   for="customCheck100">مقایسه</label>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" wire:click="compareProducts({{$product->id}})"
+                                                   id="customCheck{{$product->id}}">
+                                            <label class="form-check-label"
+                                                   for="customCheck{{$product->id}}">مقایسه</label>
                                         </div>
                                     </div>
                                     <h5 class="product-title">

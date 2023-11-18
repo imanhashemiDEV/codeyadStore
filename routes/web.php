@@ -13,6 +13,7 @@ require __DIR__.'/auth.php';
     Route::get('/product_details/{slug}',[\App\Http\Controllers\FrontEnd\ProductController::class,'singleProduct'])->name('single.product');
     Route::get('/main/{main_category_slug}',[\App\Http\Controllers\FrontEnd\ProductController::class,'mainCategoryProductList'])->name('main.category.product.list');
     Route::get('/search/{sub_category_slug}/{child_category_slug?}',[\App\Http\Controllers\FrontEnd\ProductController::class,'searchCategoryProductList'])->name('search.category.product.list');
+    Route::get('/compare_products/{product_id1}/{product_id2}',[\App\Http\Controllers\FrontEnd\ProductController::class,'compareProducts'])->name('compare.products');
 
 
 Route::middleware('auth')->group(function (){
