@@ -33,20 +33,13 @@ class ImageManager
         unlink($path_big);
     }
 
+    public static function ckImage($table,$image){
 
-    public static function ckImage($table,$image):string
-    {
             $name = $image->hashName();
-            $smallImage = Image::make($image->getRealPath());
             $bigImage = Image::make($image->getRealPath());
-            $smallImage->resize(256,256, function ($constraint){
-                $constraint->aspectRatio();
-            });
-
-            Storage::disk('local')->put($table.'/small/'.$name, (string) $smallImage->encode('png',90));
             Storage::disk('local')->put($table.'/big/'.$name, (string) $bigImage->encode('png',90));
+            return url("images/$table/big/".$name);
 
-
-        return  url("/images/$table/big/".$name);
     }
+
 }

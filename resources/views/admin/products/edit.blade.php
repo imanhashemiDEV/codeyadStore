@@ -90,7 +90,7 @@
     </main>
 @endsection
 @section('scripts')
-    <script src="{{url('panel/plugins/ckeditor/ckeditorConf.js')}}"></script>
+    @include('admin.layouts.ckeditorConfig')
     <script>
         $('select').select2({
             dir: "rtl",

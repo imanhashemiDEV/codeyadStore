@@ -73,3 +73,4 @@ Route::resource('discounts', DiscountController::class);
 
 Route::resource('gift_carts', GiftCartController::class);
 
+Route::post('upload_ckeditor_image',[\App\Http\Controllers\Admin\GalleryController::class,'ckeditor_image'])->name('ckeditor.upload');
