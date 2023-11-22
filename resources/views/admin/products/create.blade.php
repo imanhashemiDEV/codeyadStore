@@ -9,19 +9,19 @@
                     <form method="POST" action="{{route('products.store')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
-                            <label  class="col-sm-2 col-form-label">نام محصول</label>
+                            <label class="col-sm-2 col-form-label">نام محصول</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control text-left" dir="rtl" name="title">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label  class="col-sm-2 col-form-label">نام انگلیسی</label>
+                            <label class="col-sm-2 col-form-label">نام انگلیسی</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control text-left" dir="rtl" name="etitle">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label  class="col-sm-2 col-form-label">دسته بندی</label>
+                            <label class="col-sm-2 col-form-label">دسته بندی</label>
                             <div class="col-sm-10">
                                 <select name="category_id" class="form-select">
                                     @foreach($categories as $key => $value)
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label  class="col-sm-2 col-form-label">برند</label>
+                            <label class="col-sm-2 col-form-label">برند</label>
                             <div class="col-sm-10">
                                 <select name="brand_id" class="form-select">
                                     @foreach($brands as $key => $value)
@@ -60,7 +60,7 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="file"> آپلود عکس </label>
-                            <input  class="col-sm-10 form-control-file" type="file" name="image" id="file">
+                            <input class="col-sm-10 form-control-file" type="file" name="image" id="file">
                         </div>
                         <div class="form-group row">
                             <button type="submit" class="btn btn-success btn-uppercase">
@@ -75,14 +75,13 @@
     </main>
 @endsection
 @section('scripts')
-    @include('admin.layouts.ckeditor')
-{{--    <script src="{{url('panel/plugins/ckeditor/ckeditorConf.js')}}"></script>--}}
+    @include('admin.layouts.ckeditorConfig')
     <script>
-            $('select').select2({
-                dir: "rtl",
-                dropdownAutoWidth: true,
-                $dropdownParent: $('#parent')
-            })
+        $('select').select2({
+            dir: "rtl",
+            dropdownAutoWidth: true,
+            $dropdownParent: $('#parent')
+        })
         $('.form-select').select2();
     </script>
 @endsection
