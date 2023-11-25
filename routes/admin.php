@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\DiscountController;
+use App\Http\Controllers\Admin\DiscussionController;
+use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\GiftCartController;
 use App\Http\Controllers\Admin\GuarantyController;
 use App\Http\Controllers\Admin\PanelController;
@@ -45,6 +47,12 @@ Route::resource('tags', TagController::class);
 Route::resource('products', ProductController::class);
 Route::get('trashed_product', [ProductController::class, 'trashed'])->name('products.trashed');
 
+Route::get('product_discussions/{id}', [DiscussionController::class, 'index'])->name('product.discussions');
+Route::get('create_product_discussions/{product_id}', [DiscussionController::class, 'create'])->name('create.product.discussions');
+Route::post('store_product_discussions/{product_id}', [DiscussionController::class, 'store'])->name('store.product.discussions');
+Route::get('edit_product_discussions/{id}/{product_id}', [DiscussionController::class, 'edit'])->name('edit.product.discussions');
+Route::put('update_product_discussions/{id}/{product_id}', [DiscussionController::class, 'update'])->name('update.product.discussions');
+
 Route::get('create_product_properties/{product}', [ProductController::class, 'createProductProperties'])->name('create.product.properties');
 
 Route::resource('guarantees', GuarantyController::class);
@@ -73,4 +81,4 @@ Route::resource('discounts', DiscountController::class);
 
 Route::resource('gift_carts', GiftCartController::class);
 
-Route::post('upload_ckeditor_image',[\App\Http\Controllers\Admin\GalleryController::class,'ckeditor_image'])->name('ckeditor.upload');
+Route::post('upload_ckeditor_image',[GalleryController::class,'ckeditor_image'])->name('ckeditor.upload');

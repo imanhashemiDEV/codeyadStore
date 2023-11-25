@@ -20,6 +20,7 @@
             <th class="text-center align-middle text-primary">برند</th>
             <th class="text-center align-middle text-primary">تنوع قیمت</th>
             <th class="text-center align-middle text-primary">ویژگی محصول</th>
+            <th class="text-center align-middle text-primary">نقد و بررسی</th>
             <th class="text-center align-middle text-primary">گالری</th>
             <th class="text-center align-middle text-primary">ویرایش</th>
             <th class="text-center align-middle text-primary">حذف</th>
@@ -46,6 +47,11 @@
                 <td class="text-center align-middle">
                     <a class="btn btn-outline-warning" href="{{route('create.product.properties',$product)}}">
                         ویژگی محصول
+                    </a>
+                </td>
+                <td class="text-center align-middle">
+                    <a class="btn btn-outline-warning" href="{{route('product.discussions',$product->id)}}">
+                        نقد و بررسی
                     </a>
                 </td>
                 <td class="text-center align-middle">
