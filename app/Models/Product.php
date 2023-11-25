@@ -87,6 +87,11 @@ class Product extends Model
         return $this->morphMany(Comment::class, 'commentable')->where('status',CommentStatus::Approved->value);
     }
 
+    public function discussions()
+    {
+        return $this->hasMany(Discussion::class);
+    }
+
     public static function createProduct($request)
     {
         $product = Product::query()->create([
