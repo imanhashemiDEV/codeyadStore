@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function (){
         Route::get('/shipping',[\App\Http\Controllers\FrontEnd\HomeController::class,'shipping'])->name('user.shipping');
         Route::get('/shipping_payment',[\App\Http\Controllers\FrontEnd\HomeController::class,'shippingPayment'])->name('user.shipping.payment');
         Route::get('/payment',[\App\Http\Controllers\FrontEnd\PaymentController::class,'payment'])->name('payment');
+        Route::get('/product/comment/{product_id}',[\App\Http\Controllers\FrontEnd\ProductController::class,'productComment'])->name('product.comment');
     });
 
 

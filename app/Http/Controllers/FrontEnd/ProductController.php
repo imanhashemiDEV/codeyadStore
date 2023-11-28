@@ -35,4 +35,10 @@ class ProductController extends Controller
     {
         return view('frontend.compare_products', compact('product_id1','product_id2'));
     }
+
+    public function productComment($product_id)
+    {
+        $product = Product::query()->find($product_id);
+        return view('frontend.product_comment', compact('product'));
+    }
 }
