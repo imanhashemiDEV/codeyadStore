@@ -11,7 +11,13 @@ class Comment extends Model
 
     protected $fillable =[
         'user_id',
+        'product_id',
+        'title',
         'body',
+        'advantage',
+        'disadvantage',
+        'is_buyer',
+        'suggestion',
         'commentable_id',
         'commentable_type',
         'status'
@@ -25,5 +31,10 @@ class Comment extends Model
     public function commentable()
     {
         return $this->morphTo();
+     }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
      }
 }

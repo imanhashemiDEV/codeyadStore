@@ -15,7 +15,14 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('title');
             $table->text('body');
+            $table->string('advantage');
+            $table->string('disadvantage');
+            $table->boolean('is_buyer');
+            $table->boolean('suggestion');
             $table->integer('commentable_id');
             $table->string('commentable_type');
             $table->string('status')->default(\App\Enums\CommentStatus::Draft->value);

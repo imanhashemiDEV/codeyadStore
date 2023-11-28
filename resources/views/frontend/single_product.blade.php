@@ -223,7 +223,7 @@
                                                 شما به عنوان مالک محصول ثبت خواهد شد.
                                             </p>
                                             <div class="dt-sl mt-2">
-                                                <a href="#" class="btn-primary-cm btn-with-icon">
+                                                <a href="{{route('product.comment',$product->id)}}" class="btn-primary-cm btn-with-icon">
                                                     <i class="mdi mdi-comment-text-outline"></i>
                                                     افزودن نظر جدید
                                                 </a>
@@ -246,8 +246,7 @@
                                                 <div class="comment-body">
                                                     <div class="row">
                                                         <div class="col-md-3 col-sm-12">
-                                                            <div class="message-light message-light--purchased">
-                                                                خریدار این محصول</div>
+                                                            <div class="message-light message-light--purchased">@if($comment->is_buyer) خریدار این محصول  @else خریدار نیست @endif</div>
                                                             <ul class="comments-user-shopping">
                                                                 <li>
                                                                     <div class="cell">رنگ خریداری
@@ -265,8 +264,14 @@
                                                                     </div>
                                                                 </li>
                                                             </ul>
-                                                            <div class="message-light message-light--opinion-positive">
-                                                                خرید این محصول را توصیه می‌کنم</div>
+                                                            @if($comment->suggestion==1)
+                                                            <div class="message-light message-light--opinion-positive">خرید این محصول را توصیه می‌کنم</div>
+                                                            @elseif($comment->suggestion==2)
+                                                            <div class="message-light message-light--opinion-negative">خرید این محصول را توصیه نمی‌کنم</div>
+                                                            @else
+                                                            <div class="message-light">پیشنهادی ندارم</div>
+                                                            @endif
+
                                                         </div>
                                                         <div class="col-md-9 col-sm-12 comment-content">
                                                             <div class="comment-title">
@@ -280,11 +285,9 @@
                                                                     <div class="content-expert-evaluation-positive">
                                                                         <span>نقاط قوت</span>
                                                                         <ul>
-                                                                            <li>دوربین‌های 4گانه پرقدرت
-                                                                            </li>
-                                                                            <li>باتری باظرفیت بالا</li>
-                                                                            <li>حسگر اثرانگشت زیر قاب
-                                                                                جلویی</li>
+                                                                           @foreach(explode('@',$comment->advantage) as $advantage)
+                                                                                <li>{{$advantage}}</li>
+                                                                           @endforeach
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -292,9 +295,9 @@
                                                                     <div class="content-expert-evaluation-negative">
                                                                         <span>نقاط ضعف</span>
                                                                         <ul>
-                                                                            <li>نرم‌افزار دوربین</li>
-                                                                            <li>نبودن Nano SD در بازار
-                                                                            </li>
+                                                                            @foreach(explode('@',$comment->disadvantage) as $disadvantage)
+                                                                                <li>{{$disadvantage}}</li>
+                                                                            @endforeach
                                                                         </ul>
                                                                     </div>
                                                                 </div>

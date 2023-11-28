@@ -124,4 +124,14 @@ class Order extends Model
             'payment_type'=>$shop_data['payment_type']
         ]);
     }
+
+    public static function isBuyer($product_id,$user_id)
+    {
+        return Order::query()->whereHas('orderDetails',function ($q) use($product_id){
+            $q->where('product_id',$product_id);
+        })
+            ->where('user_id',$user_id)
+            ->where('status',OrderStatus::Payed->value)
+            ->exists();
+    }
 }
