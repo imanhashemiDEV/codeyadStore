@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{url('frontend/css/vendor/fancybox.min.css')}}">
     <link rel="stylesheet" href="{{url('frontend/css/vendor/nice-select.css')}}">
     <link rel="stylesheet" href="{{url('frontend/css/vendor/nouislider.min.css')}}">
+    @stack('styles')
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{url('frontend/css/main.css')}}">
     <link rel="stylesheet" href="{{url('frontend/css/colors/default.css')}}" id="colorswitch">

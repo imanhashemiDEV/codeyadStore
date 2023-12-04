@@ -92,6 +92,11 @@ class Product extends Model
         return $this->hasMany(Discussion::class);
     }
 
+    public function scores()
+    {
+        return $this->hasMany(ProductScore::class);
+    }
+
     public static function createProduct($request)
     {
         $product = Product::query()->create([

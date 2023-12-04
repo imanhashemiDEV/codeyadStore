@@ -18,63 +18,7 @@
                     </h1>
                     <h3>{{$product->etitle}}</h3>
                 </div>
-                <div class="comments-product-attributes px-3 dt-sl">
-                    <div class="row">
-                        <div class="col-sm-6 col-12 mb-3" >
-                            <div class="comments-product-attributes-title">کیفیت ساخت</div>
-                            <input id="ex19" type="text" data-provide="slider"
-                                   data-slider-ticks="[1, 2, 3, 4, 5]"
-                                   data-slider-ticks-labels='["خیلی بد", "بد", "معمولی","خوب","عالی"]'
-                                   data-slider-min="1" data-slider-max="5" data-slider-step="1"
-                                   data-slider-value="3" data-slider-tooltip="hide" />
-                        </div>
-                        <div class="col-sm-6 col-12 mb-3">
-                            <div class="comments-product-attributes-title">ارزش خرید به نسبت قیمت
-                            </div>
-                            <input id="ex19" type="text" data-provide="slider"
-                                   data-slider-ticks="[1, 2, 3, 4, 5]"
-                                   data-slider-ticks-labels='["خیلی بد", "بد", "معمولی","خوب","عالی"]'
-                                   data-slider-min="1" data-slider-max="5" data-slider-step="1"
-                                   data-slider-value="3" data-slider-tooltip="hide" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-12 mb-3">
-                            <div class="comments-product-attributes-title">نوآوری</div>
-                            <input id="ex19" type="text" data-provide="slider"
-                                   data-slider-ticks="[1, 2, 3, 4, 5]"
-                                   data-slider-ticks-labels='["خیلی بد", "بد", "معمولی","خوب","عالی"]'
-                                   data-slider-min="1" data-slider-max="5" data-slider-step="1"
-                                   data-slider-value="3" data-slider-tooltip="hide" />
-                        </div>
-                        <div class="col-sm-6 col-12 mb-3">
-                            <div class="comments-product-attributes-title">امکانات و قابلیت ها</div>
-                            <input id="ex19" type="text" data-provide="slider"
-                                   data-slider-ticks="[1, 2, 3, 4, 5]"
-                                   data-slider-ticks-labels='["خیلی بد", "بد", "معمولی","خوب","عالی"]'
-                                   data-slider-min="1" data-slider-max="5" data-slider-step="1"
-                                   data-slider-value="3" data-slider-tooltip="hide" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-12 mb-3">
-                            <div class="comments-product-attributes-title">سهولت استفاده</div>
-                            <input id="ex19" type="text" data-provide="slider"
-                                   data-slider-ticks="[1, 2, 3, 4, 5]"
-                                   data-slider-ticks-labels='["خیلی بد", "بد", "معمولی","خوب","عالی"]'
-                                   data-slider-min="1" data-slider-max="5" data-slider-step="1"
-                                   data-slider-value="3" data-slider-tooltip="hide" />
-                        </div>
-                        <div class="col-sm-6 col-12 mb-3">
-                            <div class="comments-product-attributes-title">طراحی و ظاهر</div>
-                            <input id="ex19" type="text" data-provide="slider"
-                                   data-slider-ticks="[1, 2, 3, 4, 5]"
-                                   data-slider-ticks-labels='["خیلی بد", "بد", "معمولی","خوب","عالی"]'
-                                   data-slider-min="1" data-slider-max="5" data-slider-step="1"
-                                   data-slider-value="3" data-slider-tooltip="hide" />
-                        </div>
-                    </div>
-                </div>
+                <livewire:frontend.product.product-rate :product="$product"/>
             </div>
         </div>
     </div>

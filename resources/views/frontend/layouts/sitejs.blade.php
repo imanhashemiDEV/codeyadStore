@@ -1,8 +1,8 @@
 @livewireScripts
 <!-- Core JS Files -->
 <script src="{{url('frontend/js/vendor/jquery-3.4.1.min.js')}}"></script>
-<script src="{{url('frontend/js/vendor/popper.min.js')}}"></script>
 <script src="{{url('frontend/js/vendor/bootstrap.min.js')}}"></script>
+<script src="{{url('frontend/js/vendor/popper.min.js')}}"></script>
 <!-- Plugins -->
 <script src="{{url('frontend/js/vendor/bootstrap-slider.min.js')}}"></script>
 <script src="{{url('frontend/js/vendor/owl.carousel.min.js')}}"></script>
