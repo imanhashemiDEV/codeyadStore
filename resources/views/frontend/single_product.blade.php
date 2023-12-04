@@ -151,66 +151,37 @@
                                 <h1>{{$product->title}}
                                 </h1>
                                 <h3>{{$product->etitle}}<span
-                                        class="rate-product">(4 از 5 | 15 نفر)</span></h3>
+                                        class="rate-product">( {{$product->scores()->first()->count}} نفر)</span></h3>
                             </div>
                             <div class="dt-sl">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <ul class="content-expert-rating">
-                                            <li>
-                                                <div class="cell">طراحی</div>
-                                                <div class="cell">
-                                                    <div class="rating rating--general" data-rate-digit="عالی">
-                                                        <div class="rating-rate" data-rate-value="100%"
-                                                             style="width: 70%;"></div>
+                                            @foreach($product->scores as $score)
+                                                <li>
+                                                    <div class="cell">{{$score->title}}</div>
+                                                    <div class="cell">
+                                                        @php
+                                                        $percent = (($score->score *100)/($score->count*5));
+                                                        if($percent < 20){
+                                                            $text = "ضعیف";
+                                                        }else if( 20 < $percent && $percent <=40){
+                                                            $text = "متوسط";
+                                                        }else if( 40 < $percent && $percent <=60){
+                                                            $text = "خوب";
+                                                        }else if( 60 < $percent && $percent <=80){
+                                                            $text = "بسیار خوب";
+                                                        }else if( 80 < $percent){
+                                                            $text = "عالی";
+                                                        }
+                                                         @endphp
+                                                        <div class="rating rating--general" data-rate-digit="{{$text}}">
+                                                            <div class="rating-rate" data-rate-value="100%"
+                                                                 style="width: {{$percent}}%;"></div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="cell">ارزش خرید</div>
-                                                <div class="cell">
-                                                    <div class="rating rating--general" data-rate-digit="عالی">
-                                                        <div class="rating-rate" data-rate-value="100%"
-                                                             style="width: 20%;"></div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="cell">کیفیت ساخت</div>
-                                                <div class="cell">
-                                                    <div class="rating rating--general" data-rate-digit="عالی">
-                                                        <div class="rating-rate" data-rate-value="100%"
-                                                             style="width: 100%;"></div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="cell">صدای مزاحم</div>
-                                                <div class="cell">
-                                                    <div class="rating rating--general" data-rate-digit="عالی">
-                                                        <div class="rating-rate" data-rate-value="100%"
-                                                             style="width: 100%;"></div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="cell">مصرف انرژی و آب</div>
-                                                <div class="cell">
-                                                    <div class="rating rating--general" data-rate-digit="عالی">
-                                                        <div class="rating-rate" data-rate-value="100%"
-                                                             style="width: 100%;"></div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="cell">امکانات و قابلیت ها</div>
-                                                <div class="cell">
-                                                    <div class="rating rating--general" data-rate-digit="عالی">
-                                                        <div class="rating-rate" data-rate-value="100%"
-                                                             style="width: 100%;"></div>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
@@ -236,7 +207,7 @@
                                     <div
                                         class="section-title text-sm-title title-wide no-after-title-wide mb-0 dt-sl">
                                         <h2>نظرات کاربران</h2>
-                                        <p class="count-comment">123 نظر</p>
+                                        <p class="count-comment">{{$product->comments()->where('status',\App\Enums\CommentStatus::Approved->value)->count()}} نظر</p>
                                     </div>
                                     <ol class="comment-list">
 
