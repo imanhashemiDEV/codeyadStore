@@ -57,7 +57,8 @@
                         </div>
                         <div class="product-seller-col">
                             <div class="product-seller-price-action">
-                                <div class="product-seller-price">{{$productGuaranty->price}}<span class="currency">تومان</span></div>
+                                <div class="product-seller-price">{{$productGuaranty->price}}<span class="currency">تومان</span>
+                                </div>
                                 <div class="product-seller-action"><a href="#" class="btn btn-outline-danger">افزودن به
                                         سبد</a></div>
                             </div>
@@ -104,7 +105,7 @@
                                         <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
                                              data-parent="#accordionExample">
                                             <div class="card-body">
-                                               {!! $discussion->description !!}
+                                                {!! $discussion->description !!}
                                             </div>
                                         </div>
                                     </div>
@@ -150,8 +151,11 @@
                             <div class="product-title dt-sl mb-3">
                                 <h1>{{$product->title}}
                                 </h1>
-                                <h3>{{$product->etitle}}<span
-                                        class="rate-product">( {{$product->scores()->first()->count}} نفر)</span></h3>
+                               @if($product->scores()->first())
+                                    <h3>{{$product->etitle}}<span
+                                            class="rate-product">( {{$product->scores()->first()->count}} نفر)</span></h3>
+                               @endif
+
                             </div>
                             <div class="dt-sl">
                                 <div class="row">
@@ -162,22 +166,25 @@
                                                     <div class="cell">{{$score->title}}</div>
                                                     <div class="cell">
                                                         @php
-                                                        $percent = (($score->score *100)/($score->count*5));
-                                                        if($percent < 20){
-                                                            $text = "ضعیف";
-                                                        }else if( 20 < $percent && $percent <=40){
-                                                            $text = "متوسط";
-                                                        }else if( 40 < $percent && $percent <=60){
-                                                            $text = "خوب";
-                                                        }else if( 60 < $percent && $percent <=80){
-                                                            $text = "بسیار خوب";
-                                                        }else if( 80 < $percent){
-                                                            $text = "عالی";
-                                                        }
-                                                         @endphp
-                                                        <div class="rating rating--general" data-rate-digit="{{$text}}">
+                                                           if($score->count>0){
+                                                                $percent = (($score->score *100)/($score->count*5));
+                                                            if($percent < 20){
+                                                                $text = "ضعیف";
+                                                            }else if( 20 < $percent && $percent <=40){
+                                                                $text = "متوسط";
+                                                            }else if( 40 < $percent && $percent <=60){
+                                                                $text = "خوب";
+                                                            }else if( 60 < $percent && $percent <=80){
+                                                                $text = "بسیار خوب";
+                                                            }else if( 80 < $percent){
+                                                                $text = "عالی";
+                                                            }
+                                                           }
+                                                        @endphp
+                                                        <div class="rating rating--general"
+                                                             data-rate-digit="{{$text ?? ""}}">
                                                             <div class="rating-rate" data-rate-value="100%"
-                                                                 style="width: {{$percent}}%;"></div>
+                                                                 style="width: {{$percent ?? 0}}%;"></div>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -194,7 +201,8 @@
                                                 شما به عنوان مالک محصول ثبت خواهد شد.
                                             </p>
                                             <div class="dt-sl mt-2">
-                                                <a href="{{route('product.comment',$product->id)}}" class="btn-primary-cm btn-with-icon">
+                                                <a href="{{route('product.comment',$product->id)}}"
+                                                   class="btn-primary-cm btn-with-icon">
                                                     <i class="mdi mdi-comment-text-outline"></i>
                                                     افزودن نظر جدید
                                                 </a>
@@ -207,89 +215,14 @@
                                     <div
                                         class="section-title text-sm-title title-wide no-after-title-wide mb-0 dt-sl">
                                         <h2>نظرات کاربران</h2>
-                                        <p class="count-comment">{{$product->comments()->where('status',\App\Enums\CommentStatus::Approved->value)->count()}} نظر</p>
+                                        <p class="count-comment">{{$product->comments()->where('status',\App\Enums\CommentStatus::Approved->value)->count()}}
+                                            نظر</p>
                                     </div>
                                     <ol class="comment-list">
 
                                         @foreach($product->submittedComments as $comment)
                                             <!-- #comment-## -->
-                                            <li>
-                                                <div class="comment-body">
-                                                    <div class="row">
-                                                        <div class="col-md-3 col-sm-12">
-                                                            <div class="message-light message-light--purchased">@if($comment->is_buyer) خریدار این محصول  @else خریدار نیست @endif</div>
-                                                            <ul class="comments-user-shopping">
-                                                                <li>
-                                                                    <div class="cell">رنگ خریداری
-                                                                        شده:</div>
-                                                                    <div class="cell color-cell">
-                                                                        <span class="shopping-color-value"
-                                                                              style="background-color: #FFFFFF; border: 1px solid rgba(0, 0, 0, 0.25)"></span>سفید
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="cell">خریداری شده
-                                                                        از:</div>
-                                                                    <div class="cell seller-cell">
-                                                                        <span class="o-text-blue">دیجی‌کالا</span>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                            @if($comment->suggestion==1)
-                                                            <div class="message-light message-light--opinion-positive">خرید این محصول را توصیه می‌کنم</div>
-                                                            @elseif($comment->suggestion==2)
-                                                            <div class="message-light message-light--opinion-negative">خرید این محصول را توصیه نمی‌کنم</div>
-                                                            @else
-                                                            <div class="message-light">پیشنهادی ندارم</div>
-                                                            @endif
-
-                                                        </div>
-                                                        <div class="col-md-9 col-sm-12 comment-content">
-                                                            <div class="comment-title">
-                                                                {{$product->title}}
-                                                            </div>
-                                                            <div class="comment-author">
-                                                               {{$comment->user->name}}
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-4 col-sm-6 col-12">
-                                                                    <div class="content-expert-evaluation-positive">
-                                                                        <span>نقاط قوت</span>
-                                                                        <ul>
-                                                                           @foreach(explode('@',$comment->advantage) as $advantage)
-                                                                                <li>{{$advantage}}</li>
-                                                                           @endforeach
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4 col-sm-6 col-12">
-                                                                    <div class="content-expert-evaluation-negative">
-                                                                        <span>نقاط ضعف</span>
-                                                                        <ul>
-                                                                            @foreach(explode('@',$comment->disadvantage) as $disadvantage)
-                                                                                <li>{{$disadvantage}}</li>
-                                                                            @endforeach
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <p>
-                                                                {{$comment->body}}
-                                                            </p>
-
-                                                            <div class="footer">
-                                                                <div class="comments-likes">
-                                                                    آیا این نظر برایتان مفید بود؟
-                                                                    <button class="btn-like" data-counter="۱۱">بله
-                                                                    </button>
-                                                                    <button class="btn-like" data-counter="۶">خیر
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                            <livewire:frontend.comment.comment-item :comment="$comment" :product="$product"/>
                                         @endforeach
 
                                     </ol>
@@ -334,7 +267,6 @@
                                             </div>
 
 
-
                                             <p>لورم ایپسوم متن ساختگی</p>
 
                                             <div class="reply"><a class="comment-reply-link" href="#">پاسخ</a></div>
@@ -349,7 +281,7 @@
                                                 <span class="says">گفت:</span>
                                                 <div class="commentmetadata">
                                                     <a href="#">
-                                                         ۱۳۹۶ در ۹:۴۲ ب.ظ
+                                                        ۱۳۹۶ در ۹:۴۲ ب.ظ
                                                     </a>
                                                 </div>
                                             </div>
@@ -370,7 +302,7 @@
                                                             class="says">گفت:</span>
                                                         <div class="commentmetadata">
                                                             <a href="#">
-                                                                 ۱۳۹۶ در ۹:۴۷ ب.ظ
+                                                                ۱۳۹۶ در ۹:۴۷ ب.ظ
                                                             </a>
                                                         </div>
                                                     </div>
@@ -414,7 +346,7 @@
                                                                         <span class="says">گفت:</span>
                                                                         <div class="commentmetadata">
                                                                             <a href="#">
-                                                                                 ۱۳۹۷ در ۸:۵۳ ق.ظ
+                                                                                ۱۳۹۷ در ۸:۵۳ ق.ظ
                                                                             </a>
                                                                         </div>
                                                                     </div>

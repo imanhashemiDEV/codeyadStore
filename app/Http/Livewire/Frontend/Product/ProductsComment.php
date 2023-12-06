@@ -17,7 +17,7 @@ class ProductsComment extends Component
     public $scoreList=[];
 
     protected $listeners = [
-        'setScore'
+        'setScore',
     ];
     public function addAdvantage()
     {

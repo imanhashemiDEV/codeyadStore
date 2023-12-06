@@ -20,7 +20,9 @@ class Comment extends Model
         'suggestion',
         'commentable_id',
         'commentable_type',
-        'status'
+        'status',
+        'liked',
+        'disliked'
     ];
 
     public function user()
