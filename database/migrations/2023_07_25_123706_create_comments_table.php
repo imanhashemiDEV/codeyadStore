@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('disadvantage');
             $table->boolean('is_buyer');
             $table->boolean('suggestion');
+            $table->integer('liked')->default(0);
+            $table->integer('disliked')->default(0);
             $table->integer('commentable_id');
             $table->string('commentable_type');
             $table->string('status')->default(\App\Enums\CommentStatus::Draft->value);
