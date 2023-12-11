@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\DiscussionController;
 use App\Http\Controllers\Admin\GalleryController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductGuarantyController;
 use App\Http\Controllers\Admin\PropertyGroupController;
 use App\Http\Controllers\Admin\ProvinceController;
+use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\TagController;
@@ -71,7 +73,9 @@ Route::resource('property_groups', PropertyGroupController::class);
 
 Route::resource('sliders', SliderController::class);
 
-Route::get('users_comments', [\App\Http\Controllers\Admin\CommentController::class,'userComments'])->name('users.comments');
+Route::get('users_comments', [CommentController::class,'userComments'])->name('users.comments');
+
+Route::get('users_questions', [QuestionController::class,'userQuestions'])->name('users.questions');
 
 Route::resource('provinces', ProvinceController::class);
 

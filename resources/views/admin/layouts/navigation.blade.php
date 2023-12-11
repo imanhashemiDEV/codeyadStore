@@ -131,6 +131,12 @@
                 </ul>
             </li>
             <li>
+                <a href="#">پرسش و پاسخ</a>
+                <ul>
+                    <li><a href="{{route('users.questions')}}">پرسش و پاسخ</a></li>
+                </ul>
+            </li>
+            <li>
                 <a href="#">تخفیفات</a>
                 <ul>
                     <li><a href="{{route('discounts.create')}}">ایجاد تخفیف</a></li>

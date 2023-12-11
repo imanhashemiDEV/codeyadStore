@@ -36,8 +36,6 @@ class Comments extends Component
             ]);
         }
     }
-
-
     public function render()
     {
         $comments = Comment::query()->orderBy('created_at','DESC')->paginate(20);

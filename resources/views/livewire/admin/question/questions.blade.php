@@ -11,37 +11,39 @@
             <th class="text-center align-middle text-primary">ردیف</th>
             <th class="text-center align-middle text-primary">نام کاربر</th>
             <th class="text-center align-middle text-primary">نام محصول</th>
-            <th class="text-center align-middle text-primary">متن نظر</th>
+            <th class="text-center align-middle text-primary">متن سوال یا پاسخ</th>
             <th class="text-center align-middle text-primary">تایید یا عدم تایید</th>
             <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($comments as $index=> $comment)
+        @foreach($questions as $index=> $question)
             <tr>
-                <td class="text-center align-middle">{{$comments->firstItem()+$index}}</td>
-                <td class="text-center align-middle">{{$comment->user->name}}</td>
-                <td class="text-center align-middle">{{$comment->product->title}}</td>
-                <td class="text-center align-middle">{{$comment->body}}</td>
+                <td class="text-center align-middle">{{$questions->firstItem()+$index}}</td>
+                <td class="text-center align-middle">{{$question->user->name}}</td>
+                <td class="text-center align-middle">{{$question->product->title}}</td>
+                <td class="text-center align-middle">{{$question->question}}</td>
                 <td class="text-center align-middle">
-                    @if($comment->status == \App\Enums\CommentStatus::Draft->value || $comment->status == \App\Enums\CommentStatus::Rejected->value)
-                        <a class="btn btn-outline-success" wire:click="submitComment({{$comment->id}})">
+                    @if($question->status == \App\Enums\QuestionStatus::Draft->value || $question->status == \App\Enums\QuestionStatus::Rejected->value)
+                        <a class="btn btn-outline-success" wire:click="submitQuestion({{$question->id}})">
                             تایید
                         </a>
                     @else
-                        <a class="btn btn-outline-danger" wire:click="submitComment({{$comment->id}})">
+                        <a class="btn btn-outline-danger" wire:click="submitQuestion({{$question->id}})">
                             عدم تایید
                         </a>
                     @endif
 
                 </td>
-                <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('%B %d، %Y')}}</td>
+                <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($question->created_at)->format('%B %d، %Y')}}</td>
             </tr>
         @endforeach
+
+
     </table>
     <div style="margin: 40px !important;"
          class="pagination pagination-rounded pagination-sm d-flex justify-content-center">
-        {{$comments->appends(Request::except('page'))->links()}}
+        {{$questions->appends(Request::except('page'))->links()}}
     </div>
 </div>
 
