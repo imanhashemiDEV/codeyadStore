@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Frontend\Product;
 
-use App\Enums\CommentStatus;
+use App\Enums\QuestionStatus;
 use App\Models\Comment;
 use App\Models\Order;
 use App\Models\ProductScore;
@@ -46,7 +46,7 @@ class ProductsComment extends Component
             $comment->disadvantage = implode('@',$this->disadvantageList);
             $comment->is_buyer = Order::isBuyer($this->product->id,auth()->user()->id);
             $comment->suggestion = $this->suggestion;
-            $comment->status = CommentStatus::Draft->value;
+            $comment->status = QuestionStatus::Draft->value;
             $this->product->comments()->save($comment);
 
             foreach ($this->scoreList as $key => $value){

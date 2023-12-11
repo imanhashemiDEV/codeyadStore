@@ -27,7 +27,7 @@ return new class extends Migration
             $table->integer('disliked')->default(0);
             $table->integer('commentable_id');
             $table->string('commentable_type');
-            $table->string('status')->default(\App\Enums\CommentStatus::Draft->value);
+            $table->string('status')->default(\App\Enums\QuestionStatus::Draft->value);
             $table->timestamps();
         });
     }

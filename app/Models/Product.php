@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\CommentStatus;
+use App\Enums\QuestionStatus;
 use App\Helpers\ImageManager;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -84,7 +84,7 @@ class Product extends Model
 
     public function submittedComments()
     {
-        return $this->morphMany(Comment::class, 'commentable')->where('status',CommentStatus::Approved->value);
+        return $this->morphMany(Comment::class, 'commentable')->where('status',QuestionStatus::Approved->value);
     }
 
     public function discussions()
