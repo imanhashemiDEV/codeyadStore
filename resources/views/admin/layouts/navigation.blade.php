@@ -8,6 +8,11 @@
             </li>
             <li data-toggle="tooltip" title="فروشگاه">
                 <a href="#store" title=" فروشگاه">
+                    <i class="icon ti-folder"></i>
+                </a>
+            </li>
+            <li data-toggle="tooltip" title="سفارشات">
+                <a href="#orders" title=" سفارشات">
                     <i class="icon ti-shopping-cart"></i>
                 </a>
             </li>
@@ -151,6 +156,14 @@
                 </ul>
             </li>
 
+        </ul>
+        <ul id="orders">
+            <li>
+                <a href="#">سفارشات</a>
+                <ul>
+                    <li><a href="{{route('panel.orders')}}">لیست سفارشات</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>

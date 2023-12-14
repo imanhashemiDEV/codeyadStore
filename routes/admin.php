@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\DiscussionController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\GiftCartController;
 use App\Http\Controllers\Admin\GuarantyController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PanelController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductGuarantyController;
@@ -86,3 +87,6 @@ Route::resource('discounts', DiscountController::class);
 Route::resource('gift_carts', GiftCartController::class);
 
 Route::post('upload_ckeditor_image',[GalleryController::class,'ckeditor_image'])->name('ckeditor.upload');
+
+Route::get('orders', [OrderController::class, 'orders'])->name('panel.orders');
+Route::get('order_details/{order_id}', [OrderController::class, 'orderDetails'])->name('panel.order.details');
