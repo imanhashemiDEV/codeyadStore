@@ -58,8 +58,11 @@
                                         <a class="dropdown-item" href="{{route('panel')}}">
                                             <i class="mdi mdi-account-card-details-outline"></i>پنل مدیریت
                                         </a>
+                                        <a class="dropdown-item" href="{{route('profile')}}">
+                                            <i class="mdi mdi-account-card-details-outline"></i>پنل کاربری
+                                        </a>
                                     @else
-                                        <a class="dropdown-item" href="{{route('panel')}}">
+                                        <a class="dropdown-item" href="{{route('profile')}}">
                                             <i class="mdi mdi-account-card-details-outline"></i>پنل کاربری
                                         </a>
                                     @endif
