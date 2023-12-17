@@ -23,8 +23,10 @@ Route::middleware('auth')->group(function (){
         Route::get('/payment',[\App\Http\Controllers\FrontEnd\PaymentController::class,'payment'])->name('payment');
         Route::get('/product/comment/{product_id}',[\App\Http\Controllers\FrontEnd\ProductController::class,'productComment'])->name('product.comment');
         Route::get('/profile',[\App\Http\Controllers\FrontEnd\ProfileController::class,'profile'])->name('profile');
+        Route::post('/profile_update',[\App\Http\Controllers\FrontEnd\ProfileController::class,'profileUpdate'])->name('profile.update');
         Route::get('/profile/orders',[\App\Http\Controllers\FrontEnd\ProfileController::class,'profileOrders'])->name('profile.orders');
         Route::get('/profile/order_details',[\App\Http\Controllers\FrontEnd\ProfileController::class,'profileOrderDetails'])->name('profile.order.details');
+        Route::get('/profile/comments',[\App\Http\Controllers\FrontEnd\ProfileController::class,'profileComments'])->name('profile.comments');
         Route::get('/profile/favorites',[\App\Http\Controllers\FrontEnd\ProfileController::class,'profileFavorites'])->name('profile.favorites');
         Route::get('/profile/addresses',[\App\Http\Controllers\FrontEnd\ProfileController::class,'profileAddresses'])->name('profile.addresses');
     });

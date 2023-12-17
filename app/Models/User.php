@@ -65,6 +65,11 @@ class User extends Authenticatable
         return $this->hasMany(Address::class);
     }
 
+    public function userInfos()
+    {
+        return $this->hasOne(UserInfo::class);
+    }
+
      // @imo_developer
     public static function createUser($request)
     {
