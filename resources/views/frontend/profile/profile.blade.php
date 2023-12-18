@@ -50,7 +50,7 @@
                                                 </div>
                                                 <div class="form-row">
                                                     <input type="text" class="input-ui pl-2 text-left dir-ltr" name="national_identity_number"
-                                                           value="{{$user->userInfo ? $user->userInfo->national_identity_number : ""}}">
+                                                           value="{{$user->userInfos ? $user->userInfos->national_identity_number : ""}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
@@ -97,7 +97,7 @@
                                                     </div>
                                                     <div class="form-row">
                                                         <input type="text" class="input-ui pl-2 text-left dir-ltr" name="bank_card_number"
-                                                               value="{{$user->userInfo ? $user->userInfo->bank_card_number : ""}}">
+                                                               value="{{$user->userInfos ? $user->userInfos->bank_card_number : ""}}">
                                                     </div>
                                                 </div>
                                             </div>
