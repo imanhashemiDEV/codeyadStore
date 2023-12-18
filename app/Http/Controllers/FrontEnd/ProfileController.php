@@ -4,6 +4,7 @@ namespace App\Http\Controllers\FrontEnd;
 
 use App\Helpers\ImageManager;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -27,19 +28,34 @@ class ProfileController extends Controller
             'image'=>ImageManager::saveImage('users',$request->image),
         ]);
 
+         if($user->userInfos){
+             $user->userInfos()->update([
+                 'bank_card_number'=>$request->input('bank_card_number'),
+                 'national_identity_number'=>$request->input('national_identity_number'),
+                 'newsletter'=>$request->input('bank_card_number')==='on',
+             ]);
+         }else{
+             $user->userInfos()->create([
+                 'bank_card_number'=>$request->input('bank_card_number'),
+                 'national_identity_number'=>$request->input('national_identity_number'),
+                 'newsletter'=>$request->input('bank_card_number')==='on',
+             ]);
+         }
+
         return redirect()->back()->with('message','اطلاعات شما بروزرسانی گردید');
     }
 
     public function profileOrders()
     {
-        return view('frontend.profile.profile');
+        $user = auth()->user();
+        $orders = Order::query()->where('user_id', $user->id)->paginate(10);
+        return view('frontend.profile.profile_orders',compact('orders'));
     }
 
     public function profileOrderDetails()
     {
-        return view('frontend.profile.profile');
+        return view('frontend.profile.profile_order_details');
     }
-
 
 
     public function profileComments()
@@ -49,11 +65,11 @@ class ProfileController extends Controller
 
     public function profileFavorites()
     {
-        return view('frontend.profile.profile');
+        return view('frontend.profile.profile_favorates');
     }
 
     public function profileAddresses()
     {
-        return view('frontend.profile.profile');
+        return view('frontend.profile.profile_addresses');
     }
 }
