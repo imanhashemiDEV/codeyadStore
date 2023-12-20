@@ -23,7 +23,7 @@
                                             <th>تاریخ ثبت سفارش</th>
                                             <th>مبلغ کل</th>
                                             <th>میزان تخفیف</th>
-                                            <th>عملیات پرداخت</th>
+                                            <th>وضعیت </th>
                                             <th>جزییات</th>
                                         </tr>
                                         </thead>
@@ -32,12 +32,28 @@
                                             <tr>
                                                 <td>{{$orders->firstItem()+$index}}</td>
                                                 <td>{{$order->order_code}}</td>
-                                                <td>{{$order->created_at}}</td>
-                                                <td>{{$order->total_price}} تومان</td>
-                                                <td>{{$order->discount_price}} تومان</td>
-                                                <td>{{$order->status}}</td>
+                                                <td>{{\Hekmatinasser\Verta\Verta::instance($order->created_at)->format('%B %d، %Y')}}</td>
+                                                <td>{{number_format($order->total_price)}} تومان</td>
+                                                <td>{{number_format($order->discount_price)}} تومان</td>
+                                                <td>
+                                                    @if($order->status==\App\Enums\OrderStatus::WaitForPayment->value)
+                                                        <span class="cursor-pointer badge badge-warning">منتظر پرداخت</span>
+                                                    @elseif($order->status==\App\Enums\OrderStatus::Payed->value)
+                                                        <span class="cursor-pointer badge badge-success">پرداخت شده</span>
+                                                    @elseif($order->status==\App\Enums\OrderStatus::Failed->value)
+                                                        <span class="cursor-pointer badge badge-danger">انصراف از پرداخت</span>
+                                                    @elseif($order->status==\App\Enums\OrderStatus::ReceivedOrder->value)
+                                                        <span class="cursor-pointer badge badge-success">سفارش دریافت شد</span>
+                                                    @elseif($order->status==\App\Enums\OrderStatus::Processing->value)
+                                                        <span class="cursor-pointer badge badge-info">در حال پردازش</span>
+                                                    @elseif($order->status==\App\Enums\OrderStatus::SendOrder->value)
+                                                        <span class="cursor-pointer badge badge-success">ارسال شده</span>
+                                                    @elseif($order->status==\App\Enums\OrderStatus::NotReceivedOrder->value)
+                                                        <span class="cursor-pointer badge badge-danger">سفارش دریافت نشده</span>
+                                                    @endif
+                                                </td>
                                                 <td class="details-link">
-                                                    <a href="#">
+                                                    <a href="{{route('profile.order.details',$order->id)}}">
                                                         <i class="mdi mdi-chevron-left"></i>
                                                     </a>
                                                 </td>
