@@ -51,6 +51,7 @@ class EditAddressModal extends Component
         $this->address=$address->address;
         $this->zip_code=$address->zip_code;
         $this->cities = City::query()->where('province_id',$address->province_id)->pluck('city', 'id');
+
     }
 
     public function changeProvince($province_id)
@@ -87,7 +88,7 @@ class EditAddressModal extends Component
         $this->dispatchBrowserEvent('closeEditAddressModal');
 
         $this->emit('refreshCart');
-
+        $this->emit('refreshProfileAddress');
     }
 
 

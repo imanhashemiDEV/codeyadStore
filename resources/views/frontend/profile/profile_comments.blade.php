@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div
-                                class="section-title text-sm-title title-wide mb-1 no-after-title-wide dt-sl mb-2 px-res-1">
+                                class="section-title text-sm-title title-wide no-after-title-wide dt-sl mb-2 px-res-1">
                                 <h2>نقد و نظرات</h2>
                             </div>
                             <div class="dt-sl">
