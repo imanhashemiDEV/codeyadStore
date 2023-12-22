@@ -16,20 +16,10 @@ use Livewire\Component;
 class Shipping extends Component
 {
 
-    public $receive_time;
-    public $send_type;
-    public $receive_day;
-    public $send_day;
-    public $send_price;
+    public $receive_time,$send_type,$receive_day,$send_day,
+        $send_price,$selected_address,$carts,$total_price,$discount_price;
     public $request_factor=false;
-    public $selected_address;
-
     public $selected_day_index=0;
-
-    public $carts;
-    public $total_price;
-    public $discount_price;
-
 
     protected $listeners = [
         'refreshCart' => '$refresh',

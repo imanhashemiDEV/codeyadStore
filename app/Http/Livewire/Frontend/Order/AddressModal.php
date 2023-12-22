@@ -29,10 +29,6 @@ class AddressModal extends Component
         'zip_code' => 'required|digits:10',
     ];
 
-    protected $listeners = [
-
-    ];
-
     public function mount()
     {
         $this->provinces = Province::query()->pluck('province', 'id');
@@ -73,7 +69,7 @@ class AddressModal extends Component
         $this->dispatchBrowserEvent('closeAddressModal');
 
         $this->emit('refreshCart');
-
+        $this->emit('refreshProfileAddress');
     }
 
     public function render()

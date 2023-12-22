@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="form-ui dt-sl">
-                            <form class="form-account" wire:submit.prevent="submit">
+                            <form class="form-account" style="max-width: 90% !important;" wire:submit.prevent="submit">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12 mb-2">
                                         <div class="form-row-title">
