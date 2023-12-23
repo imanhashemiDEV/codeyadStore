@@ -70,6 +70,11 @@ class User extends Authenticatable
         return $this->hasOne(UserInfo::class);
     }
 
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
      // @imo_developer
     public static function createUser($request)
     {

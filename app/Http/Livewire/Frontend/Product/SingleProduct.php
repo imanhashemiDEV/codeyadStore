@@ -3,7 +3,9 @@
 namespace App\Http\Livewire\Frontend\Product;
 
 use App\Models\Cart;
+use App\Models\Favorite;
 use App\Models\ProductGuaranty;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class SingleProduct extends Component
@@ -16,6 +18,27 @@ class SingleProduct extends Component
         $this->product_guaranty = ProductGuaranty::query()->
         where('product_id',$this->product->id)->
         orderBy('price', 'ASC')->first();
+    }
+
+    public function AddFavorite($product_id)
+    {
+        if(Auth::user()){
+            $favorite = Favorite::query()->where([
+                'user_id'=> auth()->user()->id,
+                'product_id'=>$product_id
+            ])->first();
+            if($favorite){
+                $favorite->delete();
+            }else{
+                Favorite::query()->create([
+                    'user_id'=> auth()->user()->id,
+                    'product_id'=>$product_id
+                ]);
+            }
+        }else{
+            session()->flash('message','برای اضافه شدن به لیست علاقه مندی ها باید وارد سایت شوید');
+        }
+
     }
     public function changeProduct($color_id)
     {

@@ -1,14 +1,33 @@
 <div class="dt-sn mb-5 dt-sl">
     <div class="row">
         <!-- Product Gallery-->
+
         <div class="col-lg-4 col-md-6 ps-relative">
             <!-- Product Options-->
             <ul class="gallery-options">
-                <li>
-                    <button class="add-favorites"><i class="mdi mdi-heart"></i></button>
+                <div class="row">
+                    @if(session()->has('message'))
+                        <div class="text-danger">
+                            {{session('message')}}
+                        </div>
+                    @endif
+                </div>
+                @php
+                if(auth()->user()){
+                   $fav = \App\Models\Favorite::query()
+                   ->where('user_id',auth()->user()->id)
+                   ->where('product_id',$product->id)->exists();
+                }else{
+                    $fav = null;
+                }
+
+                @endphp
+                <li wire:click="AddFavorite({{$product->id}})">
+                    <button class="add-favorites "><i class="mdi mdi-heart @if($fav) text-danger @endif"></i></button>
                     <span class="tooltip-option">افزودن به علاقمندی</span>
                 </li>
             </ul>
+
             @if($product->special_expiration != null && $product->special_expiration > now())
                 <div class="product-timeout position-relative pt-5 mb-3">
                     <div class="promotion-badge">
