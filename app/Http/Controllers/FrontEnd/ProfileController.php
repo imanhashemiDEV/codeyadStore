@@ -71,7 +71,7 @@ class ProfileController extends Controller
 
     public function profileFavorites()
     {
-        return view('frontend.profile.profile_favorates');
+        return view('frontend.profile.profile_favorites');
     }
 
     public function profileAddresses()
