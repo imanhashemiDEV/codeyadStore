@@ -90,3 +90,5 @@ Route::post('upload_ckeditor_image',[GalleryController::class,'ckeditor_image'])
 
 Route::get('orders', [OrderController::class, 'orders'])->name('panel.orders');
 Route::get('order_details/{order_id}', [OrderController::class, 'orderDetails'])->name('panel.order.details');
+
+Route::get('sellers', [UserController::class,'sellers'])->name('panel.sellers');

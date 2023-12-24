@@ -70,6 +70,11 @@ class User extends Authenticatable
         return $this->hasOne(UserInfo::class);
     }
 
+    public function seller()
+    {
+        return $this->hasOne(Seller::class);
+    }
+
     public function favorites()
     {
         return $this->hasMany(Favorite::class);

@@ -62,6 +62,12 @@
                     <li><a href="{{route('cities.index')}}">لیست شهر ها</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="#">فروشندگان</a>
+                <ul>
+                    <li><a href="{{route('panel.sellers')}}">لیست فروشندگان </a></li>
+                </ul>
+            </li>
         </ul>
         <ul id="store">
             <li>

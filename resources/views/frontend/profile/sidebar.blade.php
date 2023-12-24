@@ -48,6 +48,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{route('profile.user.company')}}" @if(\Illuminate\Support\Facades\Route::current()->getName()=='profile.user.company') class="active" @endif>
+                                <i class="mdi mdi-account-circle-outline"></i>
+                                فروشندگی
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{route('profile.orders')}}" @if(\Illuminate\Support\Facades\Route::current()->getName()=='profile.orders') class="active" @endif>
                                 <i class="mdi mdi-basket"></i>
                                 همه سفارش ها
