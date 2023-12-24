@@ -29,6 +29,8 @@ Route::middleware('auth')->group(function (){
         Route::get('/profile/comments',[\App\Http\Controllers\FrontEnd\ProfileController::class,'profileComments'])->name('profile.comments');
         Route::get('/profile/favorites',[\App\Http\Controllers\FrontEnd\ProfileController::class,'profileFavorites'])->name('profile.favorites');
         Route::get('/profile/addresses',[\App\Http\Controllers\FrontEnd\ProfileController::class,'profileAddresses'])->name('profile.addresses');
+        Route::get('/profile/user_company',[\App\Http\Controllers\FrontEnd\ProfileController::class,'profileUserCompany'])->name('profile.user.company');
+    Route::post('/profile/seller_update',[\App\Http\Controllers\FrontEnd\ProfileController::class,'profileSellerUpdate'])->name('profile.seller.update');
     });
 
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\FrontEnd;
 
+use App\Enums\CompanyStatus;
+use App\Helpers\FileManager;
 use App\Helpers\ImageManager;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
@@ -45,6 +47,34 @@ class ProfileController extends Controller
          }
 
         return redirect()->back()->with('message','اطلاعات شما بروزرسانی گردید');
+    }
+
+    public function profileUserCompany()
+    {
+        $user = auth()->user();
+        return view('frontend.profile.user_company',compact('user'));
+    }
+
+    public function profileSellerUpdate(Request $request)
+    {
+        $user = auth()->user();
+        $contract = FileManager::saveContract($request->contract,$request->input('company_name'));
+        if($user->seller){
+            $user->seller->update([
+                'company_name'=>$request->input('company_name'),
+                'company_economy_number'=>$request->input('company_economy_number'),
+                'contract'=>$contract,
+                'status' => CompanyStatus::Request->value
+            ]);
+        }else{
+            $user->seller()->create([
+                'company_name'=>$request->input('company_name'),
+                'company_economy_number'=>$request->input('company_economy_number'),
+                'contract'=>$contract,
+            ]);
+        }
+
+        return redirect()->back()->with('message','اطلاعات شرکت شما بروزرسانی گردید');
     }
 
     public function profileOrders()
