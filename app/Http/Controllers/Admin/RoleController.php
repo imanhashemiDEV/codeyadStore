@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -77,5 +78,22 @@ class RoleController extends Controller
     {
 //        $role = Role::destroy($id);
 //        return redirect()->route('roles.index')->with('message',"نقش با موفقیت حذف شد");
+    }
+
+    public function createRolePermissions($role_id)
+    {
+        $role = Role::query()->find($role_id);
+        $permissions = Permission::query()->get();
+
+        return view('admin.roles.role_permissions', compact('role', 'permissions'));
+    }
+
+
+    public function storeRolePermissions(Request $request,$role_id)
+    {
+        $role = Role::query()->find($role_id);
+        $role->syncPermissions($request->input('permissions'));
+
+        return redirect()->back()->with('message','مجوزها به نقش متصل شدند');
     }
 }

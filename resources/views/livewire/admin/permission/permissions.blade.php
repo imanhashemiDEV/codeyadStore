@@ -9,34 +9,28 @@
         <thead class="thead-light">
         <tr>
             <th class="text-center align-middle text-primary">ردیف</th>
-            <th class="text-center align-middle text-primary">عنوان نقش</th>
-            <th class="text-center align-middle text-primary">مجوزها</th>
+            <th class="text-center align-middle text-primary">عنوان مجوز</th>
             <th class="text-center align-middle text-primary">ویرایش</th>
             <th class="text-center align-middle text-primary">حذف</th>
             <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($roles as $index=> $role)
+        @foreach($permissions as $index=> $permission)
             <tr>
-                <td class="text-center align-middle">{{$roles->firstItem()+$index}}</td>
-                <td class="text-center align-middle">{{$role->name}}</td>
+                <td class="text-center align-middle">{{$permissions->firstItem()+$index}}</td>
+                <td class="text-center align-middle">{{$permission->name}}</td>
                 <td class="text-center align-middle">
-                    <a class="btn btn-outline-info" href="{{route('create.role.permissions', $role->id)}}">
-                        مجوزها
-                    </a>
-                </td>
-                <td class="text-center align-middle">
-                    <a class="btn btn-outline-info" href="{{route('roles.edit', $role->id)}}">
+                    <a class="btn btn-outline-info" href="{{route('permissions.edit', $permission->id)}}">
                         ویرایش
                     </a>
                 </td>
                 <td class="text-center align-middle">
-                    <a class="btn btn-outline-danger" wire:click="deleteRole({{$role->id}})">
+                    <a class="btn btn-outline-danger" wire:click="deletePermission({{$permission->id}})">
                         حذف
                     </a>
                 </td>
-                <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($role->created_at)->format('%B %d، %Y')}}</td>
+                <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($permission->created_at)->format('%B %d، %Y')}}</td>
             </tr>
         @endforeach
 
@@ -44,12 +38,12 @@
     </table>
     <div style="margin: 40px !important;"
          class="pagination pagination-rounded pagination-sm d-flex justify-content-center">
-        {{$roles->appends(Request::except('page'))->links()}}
+        {{$permissions->appends(Request::except('page'))->links()}}
     </div>
 </div>
 @section('scripts')
     <script>
-        window.addEventListener('deleteRole',event=>{
+        window.addEventListener('deletePermission',event=>{
             Swal.fire({
                 title: 'آیا از حذف مطمئن هستید؟',
                 icon: 'warning',
@@ -60,7 +54,7 @@
                 cancelButtonText:'خیر'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Livewire.emit('destroyRole',event.detail.id)
+                    Livewire.emit('destroyPermission',event.detail.id)
                     Swal.fire(
                         'حذف با موفقیت انجام شد',
                     )
@@ -69,3 +63,4 @@
         })
     </script>
 @endsection
+
