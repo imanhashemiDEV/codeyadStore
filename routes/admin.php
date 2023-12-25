@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\GiftCartController;
 use App\Http\Controllers\Admin\GuarantyController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PanelController;
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductGuarantyController;
 use App\Http\Controllers\Admin\PropertyGroupController;
@@ -34,6 +35,9 @@ Route::resource('users', UserController::class);
 Route::resource('roles', RoleController::class);
 Route::get('create_user_role/{id}', [UserController::class, 'createUserRole'])->name('create.user.role');
 Route::post('store_user_role/{id}', [UserController::class, 'storeUserRole'])->name('store.user.role');
+Route::resource('permissions', PermissionController::class);
+Route::get('create_role_permissions/{id}', [RoleController::class, 'createRolePermissions'])->name('create.role.permissions');
+Route::post('store_role_permissions/{id}', [RoleController::class, 'storeRolePermissions'])->name('store.role.permissions');
 
 //-- Store Routes --//
 Route::resource('categories', CategoryController::class);

@@ -3,9 +3,7 @@
 namespace App\Http\Livewire\Admin\Seller;
 
 use App\Enums\CompanyStatus;
-use App\Enums\UserStatus;
 use App\Models\Seller;
-use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
