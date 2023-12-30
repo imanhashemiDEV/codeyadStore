@@ -10,6 +10,9 @@ class PanelController extends Controller
 {
     public function index()
     {
+        $user = auth()->user();
+//        $permissions = $user->getPermissionsViaRoles();
+//        dd($permissions);
         return view('admin.index');
     }
 
