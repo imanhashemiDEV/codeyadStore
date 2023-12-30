@@ -2,7 +2,6 @@
 
 namespace App\Helpers;
 
-use App\Models\Gallery;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 

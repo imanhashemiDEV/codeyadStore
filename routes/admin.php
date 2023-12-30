@@ -31,6 +31,11 @@ Route::get('/', [PanelController::class, 'index'])->name('panel');
 
 //Admin routes
 //-- Users Routes --//
+//Route::group(['middleware' => ['can:لیست کاربران']], function () {
+//    Route::resource('users', UserController::class);
+//});
+
+// imo_developer
 Route::resource('users', UserController::class);
 Route::resource('roles', RoleController::class);
 Route::get('create_user_role/{id}', [UserController::class, 'createUserRole'])->name('create.user.role');

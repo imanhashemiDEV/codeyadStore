@@ -1,6 +1,13 @@
 <div class="navigation">
     <div class="navigation-icon-menu">
         <ul>
+            @role('مدیر کل')
+            <li data-toggle="tooltip" title="کاربران">
+                <a href="#users" title=" کاربران">
+                    <i class="icon ti-user"></i>
+                </a>
+            </li>
+            @endrole
             <li data-toggle="tooltip" title="کاربران">
                 <a href="#users" title=" کاربران">
                     <i class="icon ti-user"></i>
@@ -36,7 +43,9 @@
                 <a href="#">کاربران</a>
                 <ul>
                     <li><a href="{{route('users.create')}}">ایجاد کاربر</a></li>
+                    {{--                    @can('لیست کاربران')--}}
                     <li><a href="{{route('users.index')}}">لیست کاربران</a></li>
+                    {{--                        @endcan--}}
                 </ul>
             </li>
             <li>
@@ -91,7 +100,7 @@
                     <li><a href="{{route('banners.index')}}">لیست بنرها</a></li>
                 </ul>
             </li>
-{{--            @hasanyrole('مدیر فروش')--}}
+            {{--            @hasanyrole('مدیر فروش')--}}
             <li>
                 <a href="#">دسته بندی</a>
                 <ul>
@@ -99,7 +108,7 @@
                     <li><a href="{{route('categories.index')}}">لیست دسته بندی</a></li>
                 </ul>
             </li>
-{{--            @endhasanyrole--}}
+            {{--            @endhasanyrole--}}
             <li>
                 <a href="#">برند ها</a>
                 <ul>
