@@ -11,6 +11,8 @@ class PanelController extends Controller
     public function index()
     {
         $user = auth()->user();
+        //phpinfo();
+        //extension=php_imagick.dll
 //        $permissions = $user->getPermissionsViaRoles();
 //        dd($permissions);
         return view('admin.index');
