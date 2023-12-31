@@ -7,7 +7,7 @@ use App\Models\User;
 
 class UniqueCodeGenerator
 {
-    public static function generateRandomString($length = 6 , $model)
+    public static function generateRandomString($length, $model)
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -23,7 +23,7 @@ class UniqueCodeGenerator
         }
     }
 
-    public static function generateRandomInteger($length = 6,$model)
+    public static function generateRandomInteger($length,$model)
     {
         $characters = '0123456789';
         $charactersLength = strlen($characters);
