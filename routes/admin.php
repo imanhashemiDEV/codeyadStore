@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\VendorController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -101,3 +102,5 @@ Route::get('orders', [OrderController::class, 'orders'])->name('panel.orders');
 Route::get('order_details/{order_id}', [OrderController::class, 'orderDetails'])->name('panel.order.details');
 
 Route::get('sellers', [UserController::class,'sellers'])->name('panel.sellers');
+
+Route::resource('vendors', VendorController::class);
