@@ -1,13 +1,13 @@
 <div class="navigation">
     <div class="navigation-icon-menu">
         <ul>
-            @role('مدیر کل')
-            <li data-toggle="tooltip" title="کاربران">
-                <a href="#users" title=" کاربران">
-                    <i class="icon ti-user"></i>
-                </a>
-            </li>
-            @endrole
+{{--            @role('مدیر کل')--}}
+{{--            <li data-toggle="tooltip" title="کاربران">--}}
+{{--                <a href="#users" title=" کاربران">--}}
+{{--                    <i class="icon ti-user"></i>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+{{--            @endrole--}}
             <li data-toggle="tooltip" title="کاربران">
                 <a href="#users" title=" کاربران">
                     <i class="icon ti-user"></i>
@@ -19,8 +19,13 @@
                 </a>
             </li>
             <li data-toggle="tooltip" title="سفارشات">
-                <a href="#orders" title=" سفارشات">
+                <a href="#orders" title="سفارشات">
                     <i class="icon ti-shopping-cart"></i>
+                </a>
+            </li>
+            <li data-toggle="tooltip" title="انبار">
+                <a href="#vendors" title="انبار">
+                    <i class="icon ti-truck"></i>
                 </a>
             </li>
         </ul>
@@ -184,6 +189,15 @@
                 <a href="#">سفارشات</a>
                 <ul>
                     <li><a href="{{route('panel.orders')}}">لیست سفارشات</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul id="vendors">
+            <li>
+                <a href="#">انبار</a>
+                <ul>
+                    <li><a href="{{route('vendors.create')}}">ایجاد انبار </a></li>
+                    <li><a href="{{route('vendors.index')}}">لیست انبارها</a></li>
                 </ul>
             </li>
         </ul>
