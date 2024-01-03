@@ -10,6 +10,7 @@
         <tr>
             <th class="text-center align-middle text-primary">ردیف</th>
             <th class="text-center align-middle text-primary">عنوان انبار</th>
+            <th class="text-center align-middle text-primary">لیست محصولات</th>
             <th class="text-center align-middle text-primary">وضعیت</th>
             <th class="text-center align-middle text-primary">ویرایش</th>
             <th class="text-center align-middle text-primary">حذف</th>
@@ -21,6 +22,11 @@
             <tr>
                 <td class="text-center align-middle">{{$vendors->firstItem()+$index}}</td>
                 <td class="text-center align-middle">{{$vendor->title}}</td>
+                <td class="text-center align-middle">
+                    <a class="btn btn-outline-success" href="{{route('add.product.vendor', $vendor->id)}}">
+                        لیست محصولات
+                    </a>
+                </td>
                 <td class="text-center align-middle" wire:click="changeStatus({{$vendor->id}})">
                     @if($vendor->status==\App\Enums\VendorStatus::Active->value)
                         <span class="cursor-pointer badge badge-success">فعال</span>

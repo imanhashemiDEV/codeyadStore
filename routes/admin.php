@@ -104,3 +104,4 @@ Route::get('order_details/{order_id}', [OrderController::class, 'orderDetails'])
 Route::get('sellers', [UserController::class,'sellers'])->name('panel.sellers');
 
 Route::resource('vendors', VendorController::class);
+Route::get('add_product_to_vendor/{vendor_id}',[VendorController::class,'addProductToVendor'])->name('add.product.vendor');

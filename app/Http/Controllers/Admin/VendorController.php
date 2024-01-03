@@ -70,4 +70,10 @@ class VendorController extends Controller
     {
         //
     }
+
+    public function addProductToVendor($vendor_id)
+    {
+        $title = "لیست محصولات";
+        return view('admin.vendors.add_products', compact('title','vendor_id'));
+    }
 }
