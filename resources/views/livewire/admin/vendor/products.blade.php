@@ -6,6 +6,13 @@
                 <input type="text" class="form-control text-left" dir="rtl" wire:model="search_vendor">
             </div>
         </div>
+        <div class="row">
+            @if(session()->has('message'))
+                <div class="alert alert-success">
+                    {{session('message')}}
+                </div>
+            @endif
+        </div>
         <table class="table table-striped table-hover">
             <thead class="thead-light">
             <tr>
@@ -15,6 +22,7 @@
                 <th class="text-center align-middle text-primary">تعداد</th>
                 <th class="text-center align-middle text-primary">رنگ</th>
                 <th class="text-center align-middle text-primary">حذف از انبار</th>
+                <th class="text-center align-middle text-primary">ورودی یا خروجی</th>
                 <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
             </tr>
             </thead>
@@ -26,9 +34,14 @@
                     <td class="text-center align-middle">{{$vendor_product->productGuaranty->guaranty->title}}</td>
                     <td class="text-center align-middle">{{$vendor_product->count}}</td>
                     <td class="text-center align-middle">{{$vendor_product->productGuaranty->color->title}}</td>
-                    <td class="text-center align-middle">
+                    <td class="text-center align-middle" wire:click="deleteFromVendor({{$vendor_product->id}})">
                         <a class="btn btn-outline-info">
                             حذف از انبار
+                        </a>
+                    </td>
+                    <td class="text-center align-middle" wire:click="$emit('enterOrExitInVendor',{{$vendor_product->productGuaranty->id}},{{$vendor_id}})" >
+                        <a class="btn btn-outline-info" data-toggle="modal" data-target="#ModalCenter">
+                            ورودی | خروجی
                         </a>
                     </td>
                     <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($vendor_product->created_at)->format('%B %d، %Y')}}</td>
@@ -67,7 +80,7 @@
                     <td class="text-center align-middle">{{$product_guaranty->guaranty->title}}</td>
                     <td class="text-center align-middle">{{$product_guaranty->count}}</td>
                     <td class="text-center align-middle">{{$product_guaranty->color->title}}</td>
-                    <td class="text-center align-middle">
+                    <td class="text-center align-middle" wire:click="addToVendor({{$product_guaranty->id}},{{$product_guaranty->count}},{{$vendor_id}})">
                         <a class="btn btn-outline-info">
                             اضافه به انبار
                         </a>
@@ -83,5 +96,6 @@
     </div>
 </div>
 
+<livewire:admin.vendor.enter-or-exit-in-vendor-modal/>
 
 
