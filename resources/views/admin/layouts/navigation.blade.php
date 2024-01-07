@@ -1,13 +1,7 @@
 <div class="navigation">
     <div class="navigation-icon-menu">
         <ul>
-{{--            @role('مدیر کل')--}}
-{{--            <li data-toggle="tooltip" title="کاربران">--}}
-{{--                <a href="#users" title=" کاربران">--}}
-{{--                    <i class="icon ti-user"></i>--}}
-{{--                </a>--}}
-{{--            </li>--}}
-{{--            @endrole--}}
+            @role('مدیر کل')
             <li data-toggle="tooltip" title="کاربران">
                 <a href="#users" title=" کاربران">
                     <i class="icon ti-user"></i>
@@ -28,6 +22,14 @@
                     <i class="icon ti-truck"></i>
                 </a>
             </li>
+            @endrole
+            @role('فروشنده')
+            <li data-toggle="tooltip" title="فروشگاه">
+                <a href="#seller" title=" فروشنده">
+                    <i class="icon ti-server"></i>
+                </a>
+            </li>
+            @endrole
         </ul>
         <ul>
             <li data-toggle="tooltip" title="ویرایش پروفایل">
@@ -43,6 +45,7 @@
         </ul>
     </div>
     <div class="navigation-menu-body">
+        @role('مدیر کل')
         <ul id="users">
             <li>
                 <a href="#">کاربران</a>
@@ -201,5 +204,52 @@
                 </ul>
             </li>
         </ul>
+        @endrole
+        @role('فروشنده')
+        <ul id="seller">
+            <li>
+                <a href="#">برند ها</a>
+                <ul>
+                    <li><a href="{{route('brands.create')}}">ایجاد برند</a></li>
+                    <li><a href="{{route('brands.index')}}">لیست برندها</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">رنگ ها</a>
+                <ul>
+                    <li><a href="{{route('colors.create')}}">ایجاد رنگ</a></li>
+                    <li><a href="{{route('colors.index')}}">لیست رنگ ها</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">تگ ها</a>
+                <ul>
+                    <li><a href="{{route('tags.create')}}">ایجاد تگ</a></li>
+                    <li><a href="{{route('tags.index')}}">لیست تگ ها</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">گارانتی ها</a>
+                <ul>
+                    <li><a href="{{route('guarantees.create')}}">ایجاد گارانتی</a></li>
+                    <li><a href="{{route('guarantees.index')}}">لیست گارانتی ها</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">گروه ویژگی ها</a>
+                <ul>
+                    <li><a href="{{route('property_groups.create')}}">ایجاد گروه ویژگی</a></li>
+                    <li><a href="{{route('property_groups.index')}}">لیست گروه ویژگی ها</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">محصولات</a>
+                <ul>
+                    <li><a href="{{route('products.create')}}">ایجاد محصول</a></li>
+                    <li><a href="{{route('products.index')}}">لیست محصولات</a></li>
+                </ul>
+            </li>
+        </ul>
+        @endrole
     </div>
 </div>
