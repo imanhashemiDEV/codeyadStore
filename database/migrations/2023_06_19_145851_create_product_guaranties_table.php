@@ -24,6 +24,8 @@ return new class extends Migration
             $table->foreign('color_id')->references('id')->on('colors');
             $table->unsignedBigInteger('guaranty_id');
             $table->foreign('guaranty_id')->references('id')->on('guarranties');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamp('special_start')->nullable();
             $table->timestamp('special_expiration')->nullable();
             $table->string('status')->default(\App\Enums\ProductStatus::Waiting->value);

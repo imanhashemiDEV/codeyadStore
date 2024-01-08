@@ -65,6 +65,16 @@ class User extends Authenticatable
         return $this->hasMany(Address::class);
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function productGuaranties()
+    {
+        return $this->hasMany(ProductGuaranty::class);
+    }
+
     public function userInfos()
     {
         return $this->hasOne(UserInfo::class);
