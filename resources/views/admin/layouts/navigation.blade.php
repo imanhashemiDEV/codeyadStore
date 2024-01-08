@@ -1,42 +1,43 @@
 <div class="navigation">
     <div class="navigation-icon-menu">
         <ul>
-            @role('مدیر کل')
+            @hasanyrole("مدیر کل|مدیر کاربران")
             <li data-toggle="tooltip" title="کاربران">
                 <a href="#users" title=" کاربران">
                     <i class="icon ti-user"></i>
                 </a>
             </li>
+            @endhasanyrole
+            @hasanyrole('مدیر فروش|مدیر کل')
             <li data-toggle="tooltip" title="فروشگاه">
                 <a href="#store" title=" فروشگاه">
                     <i class="icon ti-folder"></i>
                 </a>
             </li>
-            <li data-toggle="tooltip" title="سفارشات">
-                <a href="#orders" title="سفارشات">
+            @endhasanyrole
+            @hasanyrole('مدیر سفارشات|مدیر کل')
+            <li data-toggle="tooltip" title="سفارش‌ها">
+                <a href="#orders" title="سفارش‌ها">
                     <i class="icon ti-shopping-cart"></i>
                 </a>
             </li>
+            @endhasanyrole
+            @hasanyrole('مدیر انبار|مدیر کل')
             <li data-toggle="tooltip" title="انبار">
                 <a href="#vendors" title="انبار">
                     <i class="icon ti-truck"></i>
                 </a>
             </li>
-            @endrole
-            @role('فروشنده')
-            <li data-toggle="tooltip" title="فروشگاه">
+            @endhasanyrole
+            @hasanyrole('فروشنده')
+            <li data-toggle="tooltip" title="فروشنده">
                 <a href="#seller" title=" فروشنده">
-                    <i class="icon ti-server"></i>
+                    <i class="icon ti-panel"></i>
                 </a>
             </li>
-            @endrole
+            @endhasanyrole
         </ul>
         <ul>
-            <li data-toggle="tooltip" title="ویرایش پروفایل">
-                <a href="#" class="go-to-page">
-                    <i class="icon ti-settings"></i>
-                </a>
-            </li>
             <li data-toggle="tooltip" title="خروج">
                 <a href="{{route('logout')}}" class="go-to-page">
                     <i class="icon ti-power-off"></i>
@@ -45,7 +46,7 @@
         </ul>
     </div>
     <div class="navigation-menu-body">
-        @role('مدیر کل')
+        @hasanyrole('مدیر کاربران|مدیر کل')
         <ul id="users">
             <li>
                 <a href="#">کاربران</a>
@@ -93,6 +94,8 @@
                 </ul>
             </li>
         </ul>
+        @endhasanyrole
+        @hasanyrole('مدیر فروش|مدیر کل')
         <ul id="store">
             <li>
                 <a href="#">اسلایدر</a>
@@ -187,14 +190,18 @@
             </li>
 
         </ul>
+        @endhasanyrole
+        @hasanyrole('مدیر سفارش‌ها|مدیر کل')
         <ul id="orders">
             <li>
-                <a href="#">سفارشات</a>
+                <a href="#">سفارش‌ها</a>
                 <ul>
-                    <li><a href="{{route('panel.orders')}}">لیست سفارشات</a></li>
+                    <li><a href="{{route('panel.orders')}}">لیست سفارش‌ها</a></li>
                 </ul>
             </li>
         </ul>
+        @endhasanyrole
+        @hasanyrole('مدیر انبار|مدیر کل')
         <ul id="vendors">
             <li>
                 <a href="#">انبار</a>
@@ -204,44 +211,9 @@
                 </ul>
             </li>
         </ul>
-        @endrole
-        @role('فروشنده')
+        @endhasanyrole
+        @hasanyrole('فروشنده')
         <ul id="seller">
-            <li>
-                <a href="#">برند ها</a>
-                <ul>
-                    <li><a href="{{route('brands.create')}}">ایجاد برند</a></li>
-                    <li><a href="{{route('brands.index')}}">لیست برندها</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">رنگ ها</a>
-                <ul>
-                    <li><a href="{{route('colors.create')}}">ایجاد رنگ</a></li>
-                    <li><a href="{{route('colors.index')}}">لیست رنگ ها</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">تگ ها</a>
-                <ul>
-                    <li><a href="{{route('tags.create')}}">ایجاد تگ</a></li>
-                    <li><a href="{{route('tags.index')}}">لیست تگ ها</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">گارانتی ها</a>
-                <ul>
-                    <li><a href="{{route('guarantees.create')}}">ایجاد گارانتی</a></li>
-                    <li><a href="{{route('guarantees.index')}}">لیست گارانتی ها</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">گروه ویژگی ها</a>
-                <ul>
-                    <li><a href="{{route('property_groups.create')}}">ایجاد گروه ویژگی</a></li>
-                    <li><a href="{{route('property_groups.index')}}">لیست گروه ویژگی ها</a></li>
-                </ul>
-            </li>
             <li>
                 <a href="#">محصولات</a>
                 <ul>
@@ -250,6 +222,6 @@
                 </ul>
             </li>
         </ul>
-        @endrole
+        @endhasanyrole
     </div>
 </div>

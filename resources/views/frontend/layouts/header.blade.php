@@ -61,6 +61,13 @@
                                         <a class="dropdown-item" href="{{route('profile')}}">
                                             <i class="mdi mdi-account-card-details-outline"></i>پنل کاربری
                                         </a>
+                                    @elseif(auth()->user()->seller->status==\App\Enums\CompanyStatus::Active->value)
+                                        <a class="dropdown-item" href="{{route('panel')}}">
+                                            <i class="mdi mdi-account-card-details-outline"></i>پنل فروشنده
+                                        </a>
+                                        <a class="dropdown-item" href="{{route('profile')}}">
+                                            <i class="mdi mdi-account-card-details-outline"></i>پنل کاربری
+                                        </a>
                                     @else
                                         <a class="dropdown-item" href="{{route('profile')}}">
                                             <i class="mdi mdi-account-card-details-outline"></i>پنل کاربری

@@ -13,6 +13,7 @@
             <th class="text-center align-middle text-primary">شماره اقتصادی شرکت</th>
             <th class="text-center align-middle text-primary">قرارداد</th>
             <th class="text-center align-middle text-primary"> وضعیت</th>
+            <th class="text-center align-middle text-primary">نقش فروشنده</th>
             <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
         </tr>
         </thead>
@@ -30,7 +31,11 @@
                     @elseif($seller->status==\App\Enums\CompanyStatus::Banned->value)
                         <span class="cursor-pointer badge badge-danger">رد شده</span>
                     @endif
-
+                </td>
+                <td class="text-center align-middle">
+                    <a class="btn btn-outline-info" href="{{route('create.user.role', $seller->user->id)}}">
+                        نقش های کاربر
+                    </a>
                 </td>
                 <td class="text-center align-middle">
                     <a class="btn btn-outline-info" href="{{url('files/contracts/'.$seller->company_name.'/'.$seller->contract)}}">

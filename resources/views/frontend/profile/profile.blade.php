@@ -104,7 +104,7 @@
                                             <div class="col-12 mb-3">
                                                 <div class="form-row mt-2">
                                                     <div class="custom-control custom-checkbox float-right mt-2">
-                                                        <input type="checkbox" class="custom-control-input" @if($user->userInfos->newsletter) checked @endif
+                                                        <input type="checkbox" class="custom-control-input" @if($user->userInfos && $user->userInfos->newsletter) checked @endif
                                                                id="customCheck4" name="newsletter">
                                                         <label class="custom-control-label text-justify"
                                                                for="customCheck4">
