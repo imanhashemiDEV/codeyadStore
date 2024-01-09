@@ -1,17 +1,15 @@
 <div class="table overflow-auto" tabindex="8">
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">عنوان جستجو</label>
-        <div class="col-sm-8">
+        <div class="col-sm-10">
             <input type="text" class="form-control text-left" dir="rtl" wire:model="search">
         </div>
-    </div>
-    <div class="row m-4">
-        <a href="{{route('create.product.guarantees', $product_id)}}" class="btn btn-outline-info"> ایجاد تنوع قیمت </a>
     </div>
     <table class="table table-striped table-hover">
         <thead class="thead-light">
         <tr>
             <th class="text-center align-middle text-primary">ردیف</th>
+            <th class="text-center align-middle text-primary">عکس</th>
             <th class="text-center align-middle text-primary">قیمت اصلی</th>
             <th class="text-center align-middle text-primary">تخفیف</th>
             <th class="text-center align-middle text-primary">قیمت نمایش داده شده</th>
@@ -30,6 +28,11 @@
         @foreach($product_guarantees as $index=> $product_guaranty)
             <tr>
                 <td class="text-center align-middle">{{$product_guarantees->firstItem()+$index}}</td>
+                <td class="text-center align-middle">
+                    <figure class="avatar avatar">
+                        <img src="{{url('images/products/small/'.$product_guaranty->product->image)}}"  alt="image">
+                    </figure>
+                </td>
                 <td class="text-center align-middle">{{$product_guaranty->main_price}}</td>
                 <td class="text-center align-middle">{{$product_guaranty->discount}}</td>
                 <td class="text-center align-middle">{{$product_guaranty->price}}</td>
@@ -47,7 +50,7 @@
 
                 </td>
                 <td class="text-center align-middle">
-                    <a class="btn btn-outline-info" href="{{route('edit.product.guarantees',[$product_guaranty->id,$product_id])}}">
+                    <a class="btn btn-outline-info" href="{{route('edit.product.guarantees',[$product_guaranty->id,$product_guaranty->product->id])}}">
                         ویرایش
                     </a>
                 </td>
@@ -56,7 +59,7 @@
                         حذف
                     </a>
                 </td>
-                <td class="text-center align-middle" @if(auth()->user()->is_admin) wire:click="chaneProductGuarantyStatus({{$product_guaranty->id}})" @endif>
+                <td class="text-center align-middle">
                     @if($product_guaranty->status==\App\Enums\ProductStatus::Waiting->value)
                         <span class="cursor-pointer badge badge-success">در حال بررسی</span>
                     @elseif($product_guaranty->status==\App\Enums\ProductStatus::Available->value)

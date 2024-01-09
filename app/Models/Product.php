@@ -29,7 +29,8 @@ class Product extends Model
         'special_expiration',
         'status',
         'category_id',
-        'brand_id'
+        'brand_id',
+        'user_id'
     ];
 
     public function user()
@@ -110,6 +111,7 @@ class Product extends Model
     public static function createProduct($request)
     {
         $product = Product::query()->create([
+            'user_id'=>auth()->user()->id,
             'title'=>$request->input('title'),
             'etitle'=>$request->input('etitle'),
             'slug'=>str()->slug($request->etitle),
@@ -125,6 +127,7 @@ class Product extends Model
     {
         $product = Product::query()->find($id);
         $product->update([
+            'user_id'=>auth()->user()->id,
             'title'=>$request->input('title'),
             'etitle'=>$request->input('etitle'),
             'slug'=>str()->slug($request->etitle),

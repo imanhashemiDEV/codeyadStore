@@ -6,5 +6,6 @@ enum ProductStatus:string{
     case Available ='available';
     case UnAvailable ='unavailable';
     case StopProduction ='stop_production';
+
     case Rejected ='rejected';
 }
