@@ -26,7 +26,8 @@ class ProductGuarantyRequest extends FormRequest
             'product_id'=>[
                 Rule::unique('product_guaranties', 'product_id')
                     ->where('guaranty_id', $this->input('guaranty_id'))
-                    ->where('color_id', $this->input('color_id')),
+                    ->where('color_id', $this->input('color_id'))
+                    ->where('user_id', auth()->user()->id),
             ]
 
         ];
@@ -36,7 +37,7 @@ class ProductGuarantyRequest extends FormRequest
     public function messages()
     {
         return [
-              'product_id.unique'=>'تنوع قیمت برای این محصول با این گارانتی و رنگ ثبت شده است'
+              'product_id.unique'=>'تنوع قیمت برای این محصول با این گارانتی و رنگ  و فروشنده ثبت شده است'
         ];
     }
 }

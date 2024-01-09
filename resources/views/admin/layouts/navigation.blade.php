@@ -217,8 +217,8 @@
             <li>
                 <a href="#">محصولات</a>
                 <ul>
-                    <li><a href="{{route('products.create')}}">ایجاد محصول</a></li>
-                    <li><a href="{{route('products.index')}}">لیست محصولات</a></li>
+                    <li><a href="{{route('products.index')}}">لیست همه محصولات</a></li>
+                    <li><a href="{{route('seller.products')}}">لیست محصولات من</a></li>
                 </ul>
             </li>
         </ul>

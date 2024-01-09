@@ -1,19 +1,16 @@
 <?php
 
-namespace App\Http\Livewire\Admin\ProductGuaranty;
+namespace App\Http\Livewire\Seller\Product;
 
-use App\Enums\ProductStatus;
-use App\Helpers\DateManager;
 use App\Models\Product;
 use App\Models\ProductGuaranty;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class ProductGuarantees extends Component
+class SellerProducts extends Component
 {
     use WithPagination;
 
-    public $product_id;
     protected $paginationTheme = 'bootstrap';
     public $search;
 
@@ -75,47 +72,11 @@ class ProductGuarantees extends Component
         $this->emit('refreshComponent');
     }
 
-    public function chaneProductGuarantyStatus($product_guaranty_id)
-    {
-        $product = ProductGuaranty::query()->find($product_guaranty_id);
-        if($product->status== ProductStatus::Waiting->value){
-            $product->update([
-                'status'=>ProductStatus::Available->value
-            ]);
-        }elseif($product->status== ProductStatus::Available->value){
-            $product->update([
-                'status'=>ProductStatus::UnAvailable->value
-            ]);
-        }elseif($product->status== ProductStatus::UnAvailable->value){
-            $product->update([
-                'status'=>ProductStatus::StopProduction->value
-            ]);
-        }
-        elseif($product->status== ProductStatus::StopProduction->value){
-            $product->update([
-                'status'=>ProductStatus::Rejected->value
-            ]);
-        }
-        elseif($product->status== ProductStatus::Rejected->value){
-            $product->update([
-                'status'=>ProductStatus::Waiting->value
-            ]);
-        }
-    }
     public function render()
     {
-        $product_id = $this->product_id;
-        if(auth()->user()->is_admin){
-            $product_guarantees = ProductGuaranty::query()
-                ->where('product_id', $this->product_id)
-                ->paginate(10);
-        }else{
-            $product_guarantees = ProductGuaranty::query()
-                ->where('product_id', $this->product_id)
-                ->where('user_id', auth()->user()->id)
-                ->paginate(10);
-        }
-
-        return view('livewire.admin.product-guaranty.product-guarantees', compact('product_guarantees', 'product_id'));
+        $product_guarantees = ProductGuaranty::query()
+            ->where('user_id', auth()->user()->id)
+            ->paginate(10);
+        return view('livewire.seller.product.seller-products',compact('product_guarantees'));
     }
 }

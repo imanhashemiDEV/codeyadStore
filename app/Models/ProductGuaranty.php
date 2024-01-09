@@ -22,6 +22,7 @@ class ProductGuaranty extends Model
         'guaranty_id',
         'special_start',
         'special_expiration',
+        'user_id'
     ];
 
 
@@ -53,6 +54,7 @@ class ProductGuaranty extends Model
 
         $price = ($request->input('main_price') ) - (($request->input('main_price')* $request->input('discount'))/100);
        ProductGuaranty::query()->create([
+            'user_id'=>auth()->user()->id,
             'main_price'=>$request->input('main_price'),
             'discount'=>$request->input('discount'),
             'price'=> $price,
@@ -90,6 +92,7 @@ class ProductGuaranty extends Model
         $price = ($request->input('main_price') ) - (($request->input('main_price')* $request->input('discount'))/100);
         $product_guaranty = ProductGuaranty::query()->find($id);
         $product_guaranty->update([
+            'user_id'=>auth()->user()->id,
             'main_price'=>$request->input('main_price'),
             'discount'=>$request->input('discount'),
             'price'=> $price,
@@ -126,6 +129,7 @@ class ProductGuaranty extends Model
     public static function updateProduct($product, float|int $price, $request): void
     {
         $product->update([
+            'user_id'=>auth()->user()->id,
             'price' => $price,
             'discount' => $request->input('discount'),
             'count' => $request->input('count'),
