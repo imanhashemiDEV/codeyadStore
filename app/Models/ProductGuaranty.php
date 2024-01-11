@@ -22,7 +22,8 @@ class ProductGuaranty extends Model
         'guaranty_id',
         'special_start',
         'special_expiration',
-        'user_id'
+        'user_id',
+        'status'
     ];
 
 

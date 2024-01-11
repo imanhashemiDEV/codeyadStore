@@ -12,12 +12,14 @@
         <thead class="thead-light">
         <tr>
             <th class="text-center align-middle text-primary">ردیف</th>
+            @if(auth()->user()->is_admin)
+            <th class="text-center align-middle text-primary">فروشنده</th>
+            @endif
             <th class="text-center align-middle text-primary">قیمت اصلی</th>
             <th class="text-center align-middle text-primary">تخفیف</th>
             <th class="text-center align-middle text-primary">قیمت نمایش داده شده</th>
             <th class="text-center align-middle text-primary">گارانتی</th>
             <th class="text-center align-middle text-primary">تعداد</th>
-            <th class="text-center align-middle text-primary">نهایت فروش</th>
             <th class="text-center align-middle text-primary">رنگ</th>
             <th class="text-center align-middle text-primary">فروش ویژه</th>
             <th class="text-center align-middle text-primary">ویرایش</th>
@@ -30,12 +32,12 @@
         @foreach($product_guarantees as $index=> $product_guaranty)
             <tr>
                 <td class="text-center align-middle">{{$product_guarantees->firstItem()+$index}}</td>
+                <td class="text-center align-middle">{{$product_guaranty->user->seller->company_name}}</td>
                 <td class="text-center align-middle">{{$product_guaranty->main_price}}</td>
                 <td class="text-center align-middle">{{$product_guaranty->discount}}</td>
                 <td class="text-center align-middle">{{$product_guaranty->price}}</td>
                 <td class="text-center align-middle">{{$product_guaranty->guaranty->title}}</td>
                 <td class="text-center align-middle">{{$product_guaranty->count}}</td>
-                <td class="text-center align-middle">{{$product_guaranty->max_sell}}</td>
                 <td class="text-center align-middle">{{$product_guaranty->color->title}}</td>
                 <td class="text-center align-middle" >
                     @if($product_guaranty->special_strat == null && $product_guaranty->special_expiration == null)
@@ -56,13 +58,11 @@
                         حذف
                     </a>
                 </td>
-                <td class="text-center align-middle" @if(auth()->user()->is_admin) wire:click="chaneProductGuarantyStatus({{$product_guaranty->id}})" @endif>
+                <td class="text-center align-middle" @if(auth()->user()->is_admin) wire:click="changeProductGuarantyStatus({{$product_guaranty->id}})" @endif>
                     @if($product_guaranty->status==\App\Enums\ProductStatus::Waiting->value)
-                        <span class="cursor-pointer badge badge-success">در حال بررسی</span>
-                    @elseif($product_guaranty->status==\App\Enums\ProductStatus::Available->value)
-                        <span class="cursor-pointer badge badge-danger">موجود</span>
-                    @elseif($product_guaranty->status==\App\Enums\ProductStatus::UnAvailable->value)
-                        <span class="cursor-pointer badge badge-danger">غیرموجود</span>
+                        <span class="cursor-pointer badge badge-info">در حال بررسی</span>
+                    @elseif($product_guaranty->status==\App\Enums\ProductStatus::Verified->value)
+                        <span class="cursor-pointer badge badge-success">تایید شده</span>
                     @elseif($product_guaranty->status==\App\Enums\ProductStatus::StopProduction->value)
                         <span class="cursor-pointer badge badge-danger">توقف تولید</span>
                     @elseif($product_guaranty->status==\App\Enums\ProductStatus::Rejected->value)

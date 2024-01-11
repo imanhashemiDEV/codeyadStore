@@ -188,6 +188,13 @@
                     <li><a href="{{route('gift_carts.index')}}">لیست کارتهای هدیه</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="#">کمیسیون ها</a>
+                <ul>
+                    <li><a href="{{route('commissions.create')}}">ایجاد کمیسیون</a></li>
+                    <li><a href="{{route('commissions.index')}}">لیست کمیسیون ها</a></li>
+                </ul>
+            </li>
 
         </ul>
         @endhasanyrole

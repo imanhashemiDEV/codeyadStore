@@ -3,9 +3,7 @@
 namespace App\Http\Livewire\Admin\Product;
 
 use App\Enums\ProductStatus;
-use App\Enums\UserStatus;
 use App\Models\Product;
-use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -37,23 +35,18 @@ class Products extends Component
         $product = Product::query()->find($product_id);
         if($product->status== ProductStatus::Waiting->value){
             $product->update([
-                'status'=>ProductStatus::Available->value
+                'status'=>ProductStatus::Verified->value
             ]);
-        }elseif($product->status== ProductStatus::Available->value){
+        }elseif($product->status== ProductStatus::Verified->value){
             $product->update([
-                'status'=>ProductStatus::UnAvailable->value
+                'status'=>ProductStatus::Rejected->value
             ]);
-        }elseif($product->status== ProductStatus::UnAvailable->value){
+        }elseif($product->status== ProductStatus::Rejected->value){
             $product->update([
                 'status'=>ProductStatus::StopProduction->value
             ]);
         }
         elseif($product->status== ProductStatus::StopProduction->value){
-            $product->update([
-                'status'=>ProductStatus::Rejected->value
-            ]);
-        }
-        elseif($product->status== ProductStatus::Rejected->value){
             $product->update([
                 'status'=>ProductStatus::Waiting->value
             ]);
@@ -61,9 +54,16 @@ class Products extends Component
     }
     public function render()
     {
-        $products = Product::query()->
-        where('title','like','%'.$this->search.'%')->
-        paginate(10);
+        if(auth()->user()->is_admin){
+            $products = Product::query()->
+            where('title','like','%'.$this->search.'%')->
+            paginate(10);
+        }else{
+            $products = Product::query()->
+            where('status',ProductStatus::Verified->value)->
+            where('title','like','%'.$this->search.'%')->
+            paginate(10);
+        }
         return view('livewire.admin.product.products', compact('products'));
     }
 

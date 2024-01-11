@@ -75,28 +75,23 @@ class ProductGuarantees extends Component
         $this->emit('refreshComponent');
     }
 
-    public function chaneProductGuarantyStatus($product_guaranty_id)
+    public function changeProductGuarantyStatus($product_guaranty_id)
     {
         $product = ProductGuaranty::query()->find($product_guaranty_id);
         if($product->status== ProductStatus::Waiting->value){
             $product->update([
-                'status'=>ProductStatus::Available->value
+                'status'=>ProductStatus::Verified->value
             ]);
-        }elseif($product->status== ProductStatus::Available->value){
+        }elseif($product->status== ProductStatus::Verified->value){
             $product->update([
-                'status'=>ProductStatus::UnAvailable->value
+                'status'=>ProductStatus::Rejected->value
             ]);
-        }elseif($product->status== ProductStatus::UnAvailable->value){
+        }elseif($product->status== ProductStatus::Rejected->value){
             $product->update([
                 'status'=>ProductStatus::StopProduction->value
             ]);
         }
         elseif($product->status== ProductStatus::StopProduction->value){
-            $product->update([
-                'status'=>ProductStatus::Rejected->value
-            ]);
-        }
-        elseif($product->status== ProductStatus::Rejected->value){
             $product->update([
                 'status'=>ProductStatus::Waiting->value
             ]);

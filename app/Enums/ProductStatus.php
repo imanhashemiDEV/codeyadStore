@@ -3,8 +3,7 @@
 namespace App\Enums;
 enum ProductStatus:string{
     case Waiting ='waiting';
-    case Available ='available';
-    case UnAvailable ='unavailable';
+    case Verified ='verified';
     case StopProduction ='stop_production';
 
     case Rejected ='rejected';
