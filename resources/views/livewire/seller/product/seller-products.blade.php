@@ -61,13 +61,11 @@
                 </td>
                 <td class="text-center align-middle">
                     @if($product_guaranty->status==\App\Enums\ProductStatus::Waiting->value)
-                        <span class="cursor-pointer badge badge-success">در حال بررسی</span>
-                    @elseif($product_guaranty->status==\App\Enums\ProductStatus::Available->value)
-                        <span class="cursor-pointer badge badge-danger">موجود</span>
-                    @elseif($product_guaranty->status==\App\Enums\ProductStatus::UnAvailable->value)
-                        <span class="cursor-pointer badge badge-danger">غیرموجود</span>
+                        <span class="cursor-pointer badge badge-info">در حال بررسی</span>
+                    @elseif($product_guaranty->status==\App\Enums\ProductStatus::Verified->value)
+                        <span class="cursor-pointer badge badge-success">تایید شده</span>
                     @elseif($product_guaranty->status==\App\Enums\ProductStatus::StopProduction->value)
-                        <span class="cursor-pointer badge badge-danger">توقف تولید</span>
+                        <span class="cursor-pointer badge badge-warning">توقف تولید</span>
                     @elseif($product_guaranty->status==\App\Enums\ProductStatus::Rejected->value)
                         <span class="cursor-pointer badge badge-danger">رد شده</span>
                     @endif

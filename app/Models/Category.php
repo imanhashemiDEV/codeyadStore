@@ -39,6 +39,11 @@ class Category extends Model
         return $this->hasMany(Product::class);
     }
 
+    public function commissions()
+    {
+        return $this->hasMany(Commission::class);
+    }
+
     public function propertyGroups()
     {
         return $this->hasMany(PropertyGroup::class);
@@ -93,6 +98,21 @@ class Category extends Model
         foreach ($categories as $category1){
             foreach ($category1->childCategory as $category2){
                 $array[$category2->id]= ' - ' . $category2->title;
+            }
+        }
+
+        return $array;
+    }
+
+    public static function getLevel3Categories()
+    {
+        $array = [];
+        $categories = self::query()->with('childCategory')->where('parent_id',0)->get();
+        foreach ($categories as $category1){
+            foreach ($category1->childCategory as $category2){
+                foreach ($category2->childCategory as $category3){
+                    $array[$category3->id]= $category3->title;
+                }
             }
         }
 

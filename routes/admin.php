@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\CommissionController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\DiscussionController;
 use App\Http\Controllers\Admin\GalleryController;
@@ -79,6 +80,7 @@ Route::get('users_questions', [QuestionController::class,'userQuestions'])->name
 Route::resource('discounts', DiscountController::class);
 Route::resource('gift_carts', GiftCartController::class);
 Route::post('upload_ckeditor_image',[GalleryController::class,'ckeditor_image'])->name('ckeditor.upload');
+Route::resource('commissions', CommissionController::class);
 
 //-- Order Routes --//
 Route::get('orders', [OrderController::class, 'orders'])->name('panel.orders');
