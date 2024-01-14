@@ -20,6 +20,7 @@ class OrderDetail extends Model
         'discount',
         'count',
         'status',
+        'seller_id'
     ];
 
     public function order()
@@ -42,10 +43,10 @@ class OrderDetail extends Model
         return $this->belongsTo(Guaranty::class);
     }
 
-
     public static function createOrderDetails( $order, $cart,$product)
     {
         return OrderDetail::query()->create([
+            'seller_id' => $product->user_id,
             'order_id' => $order->id,
             'product_id' => $cart->product_id,
             'color_id' => $cart->color_id,
@@ -56,5 +57,15 @@ class OrderDetail extends Model
             'count' => $cart->count,
             'status' => OrderDetailStatus::Waiting->value,
         ]);
+    }
+
+    public static function getProductCommissionPrice($order_detail)
+    {
+        if($order_detail->product->category->commission){
+           return $order_detail->price - ((($order_detail->product->category->commission->percentage)*$order_detail->price)/100);
+        }else{
+            return $order_detail->price;
+        }
+
     }
 }
