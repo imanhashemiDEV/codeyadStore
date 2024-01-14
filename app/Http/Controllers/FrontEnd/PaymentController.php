@@ -14,6 +14,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\ProductGuaranty;
+use App\Models\UserTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -89,6 +90,7 @@ class PaymentController extends Controller
             DB::beginTransaction();
             try{
                 Order::successfulPayment($order,$order_details,$order->discount_code,$order->gift_cart_code);
+                UserTransaction::sellerSoldProduct($order_details);
                 $result = "successful";
                 DB::commit();
                 return view('frontend.shipping_result',compact('result','order'));

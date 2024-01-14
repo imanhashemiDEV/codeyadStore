@@ -6,6 +6,7 @@ use App\Enums\CartType;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\City;
+use App\Models\OrderDetail;
 use Melipayamak;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
