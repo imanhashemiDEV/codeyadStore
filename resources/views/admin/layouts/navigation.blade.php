@@ -228,6 +228,12 @@
                     <li><a href="{{route('seller.products')}}">لیست محصولات من</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="#">تراکنش ها</a>
+                <ul>
+                    <li><a href="{{route('seller.transactions')}}">لیست تراکنش ها</a></li>
+                </ul>
+            </li>
         </ul>
         @endhasanyrole
     </div>

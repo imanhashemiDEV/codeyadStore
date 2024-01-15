@@ -2,10 +2,12 @@
 
 
 use App\Http\Controllers\Seller\SellerProductController;
+use App\Http\Controllers\Seller\SellerTransactionController;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('seller_products', [SellerProductController::class, 'sellerProducts'])->name('seller.products');
+Route::get('seller_transactions', [SellerTransactionController::class, 'sellerTransactions'])->name('seller.transactions');
 
 
 
