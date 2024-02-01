@@ -80,4 +80,10 @@ class CategoryController extends Controller
         $title = " لیست دسته بندی های حذف شده";
         return view('admin.categories.trashed_list', compact('title'));
     }
+
+    public function livewireCategory()
+    {
+        $title = "دسته بندی لایووایری";
+        return view('admin.categories.livewire_category', compact('title'));
+    }
 }
