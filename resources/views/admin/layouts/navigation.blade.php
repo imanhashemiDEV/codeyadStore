@@ -117,6 +117,7 @@
                 <ul>
                     <li><a href="{{route('categories.create')}}">ایجاد دسته بندی</a></li>
                     <li><a href="{{route('categories.index')}}">لیست دسته بندی</a></li>
+                    <li><a href="{{route('livewire.category')}}">دسته بندی با لایووایر</a></li>
                 </ul>
             </li>
             {{--            @endhasanyrole--}}

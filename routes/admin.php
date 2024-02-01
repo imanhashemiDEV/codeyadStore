@@ -51,6 +51,7 @@ Route::get('sellers', [UserController::class,'sellers'])->name('panel.sellers');
 
 //-- Store Routes --//
 Route::resource('categories', CategoryController::class);
+Route::get('livewire/getCategory', [CategoryController::class, 'livewireCategory'])->name('livewire.category');
 Route::get('trashed_category', [CategoryController::class, 'trashed'])->name('categories.trashed');
 Route::resource('brands', BrandController::class);
 Route::resource('banners', BannerController::class);
