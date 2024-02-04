@@ -23,15 +23,18 @@ class Categories extends Component
 
     public function mount()
     {
-         $this->categories= Category::query()->
-        where('parent_id',0)->get();
+
     }
 
     public function updatingSearch($value)
     {
-        $this->searched_categories =  Category::query()->
+        if($value !=="" ){
+            $this->searched_categories =  Category::query()->
             where('title','like','%'.$value.'%')
-            ->get();
+                ->get();
+        }else{
+            $this->searched_categories =[];
+        }
 
     }
 
@@ -47,6 +50,8 @@ class Categories extends Component
     }
     public function render()
     {
+        $this->categories= Category::query()->
+        where('parent_id',0)->get();
         return view('livewire.admin.category.categories');
     }
 }
