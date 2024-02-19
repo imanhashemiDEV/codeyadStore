@@ -3,7 +3,7 @@
 namespace App\Helpers;
 
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Drivers\Imagick\Driver;
+use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager as IM;
 
 class ImageManager
@@ -12,12 +12,12 @@ class ImageManager
         if($image){
             $name = $image->hashName();
             $manager = new IM(new Driver());
-            $smallImage =  $manager->read($image->getRealPath());
+            $smallImage = $manager->read($image->getRealPath());
             $bigImage = $manager->read($image->getRealPath());
             $smallImage->resize(256,256);
 
-            Storage::disk('local')->put($table.'/small/'.$name, (string) $smallImage->toPng(90));
-            Storage::disk('local')->put($table.'/big/'.$name, (string) $bigImage->toPng(90));
+            Storage::disk('local')->put($table.'/small/'.$name, (string) $smallImage->toPng());
+            Storage::disk('local')->put($table.'/big/'.$name, (string) $bigImage->toPng());
             return $name;
         }else{
             return "";
@@ -37,9 +37,8 @@ class ImageManager
         $name = $image->hashName();
         $manager = new IM(new Driver());
         $bigImage = $manager->read($image->getRealPath());
-        Storage::disk('local')->put($table.'/big/'.$name, (string) $bigImage->toPng(90));
+        Storage::disk('local')->put($table.'/big/'.$name, (string) $bigImage->toPng());
         return url("images/$table/big/".$name);
 
     }
-
 }
