@@ -50,7 +50,7 @@
         <ul id="users">
             <li>
                 <a href="#">کاربران</a>
-                <ul>
+                <ul @if( Request::RouteIs('panel') || Request::RouteIs('users.index') || Request::RouteIs('users.create') ) style="display: block"  @endif>
                     <li><a href="{{route('users.create')}}">ایجاد کاربر</a></li>
                     {{--                    @can('لیست کاربران')--}}
                     <li><a href="{{route('users.index')}}">لیست کاربران</a></li>
