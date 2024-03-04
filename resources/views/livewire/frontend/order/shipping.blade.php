@@ -7,104 +7,112 @@
             <div class="address-section">
                 <div class="checkout-contact dt-sn dt-sn--box border px-0 pt-0 pb-0">
 
-                    <div class="checkout-contact-content">
-                        <ul class="checkout-contact-items">
-                            <li class="checkout-contact-item">
-                                گیرنده:
-                                <span class="full-name">{{$selected_address->name}}</span>
-                                <a class="checkout-contact-btn-edit">اصلاح این آدرس</a>
-                            </li>
-                            <li class="checkout-contact-item">
-                                <div class="checkout-contact-item checkout-contact-item-mobile">
-                                    شماره تماس:
-                                    <span class="mobile-phone">{{$selected_address->mobile}}</span>
-                                </div>
-                                <div class="checkout-contact-item-message">
-                                    کد پستی:
-                                    <span class="post-code">{{$selected_address->zip_code}}</span>
-                                </div>
-                                <br>
-                                استان
-                                <span class="state">{{$selected_address->province->province}}</span>
-                                ، ‌شهر
-                                <span class="city">{{$selected_address->city->city}}</span>
-                                ،
-                                <span class="address-part">{{$selected_address->address}}</span>
-                            </li>
-                        </ul>
-                        <a class="checkout-contact-location" id="btn-checkout-contact-location">تغییر
-                            آدرس
-                            ارسال</a>
-                        <div class="checkout-contact-badge">
-                            <i class="mdi mdi-check-bold"></i>
+                    @if($selected_address)
+                        <div class="checkout-contact-content">
+                            <ul class="checkout-contact-items">
+                                <li class="checkout-contact-item">
+                                    گیرنده:
+                                    <span class="full-name">{{$selected_address->name}}</span>
+                                    <a class="checkout-contact-btn-edit">اصلاح این آدرس</a>
+                                </li>
+                                <li class="checkout-contact-item">
+                                    <div class="checkout-contact-item checkout-contact-item-mobile">
+                                        شماره تماس:
+                                        <span class="mobile-phone">{{$selected_address->mobile}}</span>
+                                    </div>
+                                    <div class="checkout-contact-item-message">
+                                        کد پستی:
+                                        <span class="post-code">{{$selected_address->zip_code}}</span>
+                                    </div>
+                                    <br>
+                                    استان
+                                    <span class="state">{{$selected_address->province->province}}</span>
+                                    ، ‌شهر
+                                    <span class="city">{{$selected_address->city->city}}</span>
+                                    ،
+                                    <span class="address-part">{{$selected_address->address}}</span>
+                                </li>
+                            </ul>
+                            <a class="checkout-contact-location" id="btn-checkout-contact-location">تغییر
+                                آدرس
+                                ارسال</a>
+                            <div class="checkout-contact-badge">
+                                <i class="mdi mdi-check-bold"></i>
+                            </div>
                         </div>
-                    </div>
-                    <div class="checkout-address dt-sn px-0 pt-0 pb-0" id="user-address-list-container">
-                        <div class="checkout-address-content">
-                            <div class="checkout-address-headline">آدرس مورد نظر خود را جهت تحویل
-                                انتخاب فرمایید:
-                            </div>
-                            <div class="checkout-address-row">
-                                <div class="checkout-address-col">
-                                    <button class="checkout-address-location" data-toggle="modal"
-                                            data-target="#modal-location">
-                                        <strong>ایجاد آدرس جدید</strong>
-                                    </button>
+                        <div class="checkout-address dt-sn px-0 pt-0 pb-0" id="user-address-list-container">
+                            <div class="checkout-address-content">
+                                <div class="checkout-address-headline">آدرس مورد نظر خود را جهت تحویل
+                                    انتخاب فرمایید:
                                 </div>
-                            </div>
-                            @foreach($addresses as $address)
                                 <div class="checkout-address-row">
                                     <div class="checkout-address-col">
-                                        <div class="checkout-address-box @if($address->is_default) is-selected @endif">
-                                            <h5 class="checkout-address-title">{{$address->name}}</h5>
-                                            <p class="checkout-address-text">
-                                                <span>{{$address->province->province}}، {{$address->city->city}}،{{$address->address}}</span>
-                                            </p>
-                                            <ul class="checkout-address-list">
-                                                <li>
-                                                    <ul class="checkout-address-contact-info">
-                                                        <li class="">کدپستی: <span>{{$address->zip_code}}</span></li>
-                                                        <li>شماره همراه: <span>{{$address->mobile}}</span>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <ul>
-                                                        <li>
-                                                            <button class="checkout-address-btn-edit"
-                                                                    wire:click="$emit('editAddress',{{$address->id}})"
-                                                                    data-toggle="modal"
-                                                                    data-target="#modal-location-edit">ویرایش
-                                                            </button>
-                                                        </li>
-                                                        <li>
-                                                            <button class="checkout-address-btn-remove"
-                                                                    wire:click="$emit('showDeleteAddress',{{$address->id}})"
-                                                                    data-toggle="modal"
-                                                                    data-target="#remove-location">حذف
-                                                            </button>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                            @if($address->is_default)
-                                                <button class="checkout-address-btn-submit">سفارش به این آدرس
-                                                    ارسال می‌شود.
-                                                </button>
-                                            @else
-                                                <button class="checkout-address-btn-submit">ارسال سفارش به این
-                                                    آدرس
-                                                </button>
-                                            @endif
-
-                                        </div>
+                                        <button class="checkout-address-location" data-toggle="modal"
+                                                data-target="#modal-location">
+                                            <strong>ایجاد آدرس جدید</strong>
+                                        </button>
                                     </div>
                                 </div>
-                            @endforeach
-                        </div>
-                        <button class="checkout-address-cancel" id="cancel-change-address-btn"></button>
-                    </div>
+                                @foreach($addresses as $address)
+                                    <div class="checkout-address-row">
+                                        <div class="checkout-address-col">
+                                            <div class="checkout-address-box @if($address->is_default) is-selected @endif">
+                                                <h5 class="checkout-address-title">{{$address->name}}</h5>
+                                                <p class="checkout-address-text">
+                                                    <span>{{$address->province->province}}، {{$address->city->city}}،{{$address->address}}</span>
+                                                </p>
+                                                <ul class="checkout-address-list">
+                                                    <li>
+                                                        <ul class="checkout-address-contact-info">
+                                                            <li class="">کدپستی: <span>{{$address->zip_code}}</span></li>
+                                                            <li>شماره همراه: <span>{{$address->mobile}}</span>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <ul>
+                                                            <li>
+                                                                <button class="checkout-address-btn-edit"
+                                                                        wire:click="$emit('editAddress',{{$address->id}})"
+                                                                        data-toggle="modal"
+                                                                        data-target="#modal-location-edit">ویرایش
+                                                                </button>
+                                                            </li>
+                                                            <li>
+                                                                <button class="checkout-address-btn-remove"
+                                                                        wire:click="$emit('showDeleteAddress',{{$address->id}})"
+                                                                        data-toggle="modal"
+                                                                        data-target="#remove-location">حذف
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                                @if($address->is_default)
+                                                    <button class="checkout-address-btn-submit">سفارش به این آدرس
+                                                        ارسال می‌شود.
+                                                    </button>
+                                                @else
+                                                    <button class="checkout-address-btn-submit">ارسال سفارش به این
+                                                        آدرس
+                                                    </button>
+                                                @endif
 
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <button class="checkout-address-cancel" id="cancel-change-address-btn"></button>
+                        </div>
+                    @else
+                            <div class="checkout-address-col">
+                                <button class="checkout-address-location" data-toggle="modal"
+                                        data-target="#modal-location">
+                                    <strong>ایجاد آدرس جدید</strong>
+                                </button>
+                            </div>
+                    @endif
 
                     <!-- Start Modal location new -->
                     <livewire:frontend.order.address-modal/>

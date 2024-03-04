@@ -74,16 +74,17 @@ class Shipping extends Component
     {
         $addresses = Address::query()->where('user_id',auth()->user()->id)
             ->orderByDesc('is_default')->get();
-        $this->selected_address = Address::query()->where('user_id',auth()->user()->id)
+        $address = Address::query()->where('user_id',auth()->user()->id)
             ->where('is_default',true)->first();
-        $this->send_price = $this->selected_address->city->send_price;
-        $this->send_day = $this->selected_address->city->send_day;
-        if(Carbon::now()->addDays($this->send_day)->dayOfWeek != CarbonInterface::FRIDAY){
-            $this->receive_day = Carbon::now()->addDays($this->send_day+1) ;
-            $this->selected_day_index = 0;
+        if($address){
+            $this->selected_address = $address;
+            $this->send_price = $this->selected_address->city->send_price;
+            $this->send_day = $this->selected_address->city->send_day;
+            if(Carbon::now()->addDays($this->send_day)->dayOfWeek !== CarbonInterface::FRIDAY){
+                $this->receive_day = Carbon::now()->addDays($this->send_day+1) ;
+                $this->selected_day_index = 0;
+            }
         }
-        $this->receive_day =  Carbon::now()->addDays($this->send_day);
-
 
         return view('livewire.frontend.order.shipping',
             compact('addresses'));
