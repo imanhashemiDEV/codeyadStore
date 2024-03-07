@@ -52,7 +52,8 @@ class OrderDetails extends Component
     public function render()
     {
         $orders = OrderDetail::query()->
-        orWhereHas('product',function ($q){
+        where('order_id',$this->order)->
+        whereHas('product',function ($q){
             return $q->where('title','like','%'.$this->search.'%');
         })->paginate(10);
         return view('livewire.admin.order.order-details', compact('orders'));
