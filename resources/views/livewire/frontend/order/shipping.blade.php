@@ -93,7 +93,7 @@
                                                         ارسال می‌شود.
                                                     </button>
                                                 @else
-                                                    <button class="checkout-address-btn-submit">ارسال سفارش به این
+                                                    <button wire:click="setDefaultAddress({{$address->id}})" class="checkout-address-btn-submit">ارسال سفارش به این
                                                         آدرس
                                                     </button>
                                                 @endif
