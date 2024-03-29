@@ -64,6 +64,26 @@ class Shipping extends Component
         return redirect()->route('user.shipping.payment');
     }
 
+    public function setDefaultAddress($address_id)
+    {
+        $prv_address = Address::query()
+            ->where('user_id',auth()->user()->id)
+            ->where('is_default',true)
+            ->first();
+        if($prv_address){
+            $prv_address->update([
+                'is_default'=>false
+            ]);
+        }
+        $address = Address::query()->find($address_id);
+        $address->update([
+            'is_default'=>true
+        ]);
+
+        $this->emit('refreshCart');
+
+    }
+
     public function receiveDay($i)
     {
         $this->selected_day_index = $i;
