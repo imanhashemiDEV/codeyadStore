@@ -23,7 +23,10 @@ class HeaderCart extends Component
 
     public function render()
     {
-        $carts = Cart::query()->where('type',CartType::Main->value)->get();
+        $carts = Cart::query()
+            ->where('user_id', auth()->id())
+            ->where('type',CartType::Main->value)
+            ->get();
         $total_price=0;
         foreach ($carts as $cart ){
             $product = ProductGuaranty::query()->where([
