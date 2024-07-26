@@ -90,7 +90,9 @@ class CartDetail extends Component
 
     public function render()
     {
-        $carts = Cart::query()->where('type',CartType::Main->value)->get();
+        $carts = Cart::query()
+            ->where('user_id', auth()->id())
+            ->where('type',CartType::Main->value)->get();
         $reserved_carts = Cart::query()->where('type',CartType::Reserve->value)->get();
         $total_price=0;
         $discount_price=0;

@@ -18,6 +18,12 @@ class VerificationCode extends Model
 
     public static function checkTwoMinutes($entry)
     {
+        $is_user = self::query()->where('mobile',$entry)
+            ->orWhere('email',$entry)
+            ->first();
+        if(!$is_user){
+            return false;
+        }
         $check =  self::query()->where('mobile',$entry)
             ->orWhere('email',$entry)
             ->where('created_at','<', Carbon::now()->subMinute(2))->first();
